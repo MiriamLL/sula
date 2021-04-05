@@ -1,0 +1,29 @@
+---
+title: "README"
+author: "MiriamL"
+date: "5/4/2021"
+output: html_document
+---
+
+# sula
+Paquete con datos de bobos
+
+Para instalar el paquete:
+```{r, eval=FALSE}
+# install.packages("remotes")
+remotes::install_github("MiriamLL/sula")
+```
+
+# Contiene:
+Datos de tracks de _Sula dactylatra_ colectados usando GPS en Rapa Nui<br> 
+<h1>🗿<h1>
+<br>
+Incluye 10440 observaciones de 5 variables <br>
+Incluye datos de 5 individuos <br>
+
+Para cargar datos:
+```{r, eval=FALSE}
+Tracks_Sula<-GPSdata
+```
+
+
