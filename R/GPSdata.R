@@ -8,7 +8,7 @@
 #'
 #' @usage data(GPSdata)
 #'
-#' @format Un csv en formaro rda
+#' @format Un csv en formato rda, contiene datos de cinco individuos. Las columnas son Latitude, Longitude, DateGMT, TimeGMT e ID. Tratando de replicar tal cual se descargan de los dispositivos.
 #'
 #' @keywords datasets
 #'

@@ -1,29 +1,52 @@
 ---
-title: "README"
-author: "MiriamL"
-date: "5/4/2021"
-output: html_document
+output: github_document
 ---
 
-# sula
-Paquete con datos de bobos
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-Para instalar el paquete:
-```{r, eval=FALSE}
-# install.packages("remotes")
-remotes::install_github("MiriamLL/sula")
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
 ```
 
-# Contiene:
-Datos de tracks de _Sula dactylatra_ colectados usando GPS en Rapa Nui<br> 
-<h1>🗿<h1>
-<br>
-Incluye 10440 observaciones de 5 variables <br>
-Incluye datos de 5 individuos <br>
+# sula  
 
-Para cargar datos:
-```{r, eval=FALSE}
-Tracks_Sula<-GPSdata
+<h1> 🗿 </h1>
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+```{r, echo=FALSE}
+library(emo)
 ```
 
+Este paquete contiene datos de tracks de kena (_Sula dactylatra_) colectados en Rapa Nui  
 
+
+## Instalación
+
+Puedes instalar este paquete desde [GitHub](https://github.com/) usando:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("MiriamLL/sula")
+```
+
+## Ejemplo
+
+Carga la libreria
+```{r libreria}
+library(sula)
+```
+
+Carga los datos de GPS
+```{r cargar datos}
+head(GPSdata)
+```
+
+# Proximamente
+Funciones para editar/corregir tus datos de GPS
