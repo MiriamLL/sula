@@ -1,0 +1,15 @@
+Package: sula
+Title: This package loads and manipulates data from GPS
+Version: 0.0.0.9000
+Authors@R: 
+  person(given = "Miriam",
+         family = "Lerma",
+         role = c("aut", "cre"),
+         email = "miriamjlerma@gmail.com",
+         comment = c(ORCID = "0000-0002-7632-9289"))
+Description: Carga datos de GPS y asiste con funciones para editar datos de GPS.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
