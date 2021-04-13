@@ -1,16 +1,15 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# sula
+# sula <img src="man/figures/logo.png" align="right" width = "120px"/>
 
+<!-- badges: start -->
+<!-- badges: end -->
+Este paquete contiene datos de tracks de kena (*Sula dactylatra*)
+colectados en Rapa Nui  
 <h1>
 🗿
 </h1>
-<!-- badges: start -->
-<!-- badges: end -->
-
-Este paquete contiene datos de tracks de kena (*Sula dactylatra*)
-colectados en Rapa Nui
 
 ## Instalación
 
@@ -20,6 +19,11 @@ Puedes instalar este paquete desde [GitHub](https://github.com/) usando:
 # install.packages("devtools")
 devtools::install_github("MiriamLL/sula")
 ```
+
+## Usos
+
+Por el momento el paquete solo contiene datos  
+Proximamente: Funciones para editar/corregir tus datos de GPS
 
 ## Ejemplo
 
@@ -41,7 +45,3 @@ head(GPSdata)
 #> 5 -27.20065 -109.4529 02/11/2017 17:22:13 GPS01
 #> 6 -27.20061 -109.4528 02/11/2017 17:26:25 GPS01
 ```
-
-# Proximamente
-
-Funciones para editar/corregir tus datos de GPS

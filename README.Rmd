@@ -13,9 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# sula  
-
-<h1> 🗿 </h1>
+# sula  <img src="man/figures/logo.png" align="right" width = "120px"/>
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -25,7 +23,7 @@ library(emo)
 ```
 
 Este paquete contiene datos de tracks de kena (_Sula dactylatra_) colectados en Rapa Nui  
-
+<h1> 🗿 </h1>
 
 ## Instalación
 
@@ -35,6 +33,11 @@ Puedes instalar este paquete desde [GitHub](https://github.com/) usando:
 # install.packages("devtools")
 devtools::install_github("MiriamLL/sula")
 ```
+
+## Usos
+
+Por el momento el paquete solo contiene datos    
+Proximamente: Funciones para editar/corregir tus datos de GPS    
 
 ## Ejemplo
 
@@ -48,5 +51,4 @@ Carga los datos de GPS
 head(GPSdata)
 ```
 
-# Proximamente
-Funciones para editar/corregir tus datos de GPS
+
