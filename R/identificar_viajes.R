@@ -54,8 +54,8 @@ identificar_viajes<-function(GPS_track=GPS_track,
   #sustituye nas por ceros
   track_df$trip[is.na(track_df$trip)] <- 0
   
-  track_df$trip<-gsub("1", "Y", track_df$trip)
-  track_df$trip<-gsub("0", "N", track_df$trip)
+  track_df$trip<-gsub("1", "N", track_df$trip)
+  track_df$trip<-gsub("0", "Y", track_df$trip)
   
   cat("A column named trip was added to the data frame,Y corresponds locations outside the range, and N to locations inside the range")
   return(track_df)

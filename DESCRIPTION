@@ -17,4 +17,6 @@ Imports:
     dplyr,
     magrittr,
     rgeos,
-    sp
+    sp,
+    geosphere,
+    rgdal
