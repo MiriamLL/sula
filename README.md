@@ -60,15 +60,14 @@ GPS_gmt<-ajustar_hora(GPS_raw = GPS_raw,
                             formato="%d/%m/%Y %H:%M:%S")
 ```
 
-Regresa un nuevo data frame con dos columnas adicionales: **dia\_hora**
+Regresa el mismo data frame con dos columnas adicionales: **dia\_hora**
 con el dia y fecha original y **hora\_corregida** con la nueva hora
 
 ## localizar\_nido 🐣
 
 Si no sabes las coordenadas del nido esta función usa el primer valor de
-los datos de GPS como punto de la colonia. Asume que los datos del nido
-corresponde al primer registro de GPS. Esta función esta pensada para
-obtener datos de un solo individuo.
+los datos de GPS como punto de la colonia. Esta función esta pensada
+para obtener datos de un solo individuo.
 
 ``` r
 nest_loc<-localizar_nido(GPS_track = GPS_01,
@@ -77,3 +76,22 @@ nest_loc<-localizar_nido(GPS_track = GPS_01,
 ```
 
 Regresa un nuevo data frame con dos columnas: Latitude y Longitude.
+Recuerda: Asume que los datos del nido corresponde al primer registro de
+GPS.
+
+## identificar\_viajes
+
+Agrega una columna de acuerdo a distancia de la colonia para determinar
+si esta en un viaje de alimentación o dentro del parametro considerado
+como estar en el nido.
+
+``` r
+GPS_01_trips<-identificar_viajes(GPS_track=GPS_01,
+                        nest_loc=nest_loc,
+                        distance_km=0.01)
+```
+
+En la columna llamada trip 0=dentro de la distancia considerada como
+dentro de la colonia, y 1=viaje de alimentación.
+
+## 
