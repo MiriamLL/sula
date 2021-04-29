@@ -1,7 +1,7 @@
 #' Tracks de bobo/piquero/kena Sula dactylatra en Rapa Nui
 #'
 #' Datos de tracks de Sula dactylatra colectados usando GPS en Rapa Nui
-#' Incluye 886 observaciones de 9 variables
+#' Incluye 1038 observaciones de 7 variables
 #' Incluye datos de 1 individuo
 #'
 #' @docType data

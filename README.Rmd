@@ -87,6 +87,9 @@ En la columna llamada trip:
 ## contar_viajes 🧮
 Agrega una columna con el número del viaje y elimina locaciones dentro de el radio de la colonia.
 ```{r, echo=TRUE, eval=FALSE, warnings=FALSE}
-GPS_viajes<-contar_viajes(GPS_trip=GPS_trip)
+GPS_edited<-contar_viajes(GPS_trip=GPS_trip)
 ```
+## dist_colonia
+Agrega una columna con la distancia de cada punto de la colonia.
+
 
