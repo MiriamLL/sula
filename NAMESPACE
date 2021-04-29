@@ -2,4 +2,5 @@
 
 export("%>%")
 export(ajustar_hora)
+export(localizar_nido)
 importFrom(magrittr,"%>%")
