@@ -15,9 +15,6 @@ knitr::opts_chunk$set(
 
 # sula  <img src="man/figures/logo.png" align="right" width = "120px"/>
 
-<!-- badges: start -->
-<!-- badges: end -->
-
 ```{r, echo=FALSE}
 library(emo)
 ```
@@ -34,12 +31,12 @@ Puedes instalar este paquete desde [GitHub](https://github.com/) usando:
 devtools::install_github("MiriamLL/sula")
 ```
 
-## Usos
+### Usos
 
 Por el momento el paquete solo contiene datos    
 Proximamente: Funciones para editar/corregir tus datos de GPS    
 
-## Ejemplo
+### Ejemplo
 
 Carga la libreria
 ```{r libreria}
@@ -51,4 +48,115 @@ Carga los datos de GPS
 head(GPSdata)
 ```
 
+## Funciones
+
+### Colony
+Identificar viajes
+Identifica cuando el ave esta a cierto rango de su colonia y agregar una columna con el numero del viaje
+
+Primero identifica el nido usando el primer valor del track.
+```{r}
+library(dplyr)
+coords_colony<-function(GPSdata=GPSdata,
+                        latitude_column=latitude_column,
+                        longitude_column=longitude_column){
+  
+  data<-GPSdata
+  var1<-longitude_column
+  var2<-latitude_column
+  
+  Colonydata<-GPSdata %>%
+    dplyr::summarise(
+      Longitude = dplyr::first(.data[[var1]]),
+      Latitude  = dplyr::first(.data[[var2]]), )
+  return(Colonydata)
+}
+```
+
+```{r, eval=FALSE, echo=FALSE}
+Colonydata<-coords_colony(GPSdata = GPSdata,
+                             latitude_column="Latitude",
+                             longitude_column="Longitude")
+```
+
+### Maximum distance
+```{r, echo=FALSE, eval=FALSE}
+library(rgeos) #coordinates
+library(geosphere) #distm
+library(sp)
+```
+
+
+```{r, echo=FALSE, eval=FALSE}
+obtain_maxdist<-function(GPSdata=GPSdata,
+                         Colonydata=Colonydata){
+  
+  colonia<-Colonydata
+  colonia_spatial<- SpatialPoints(cbind(colonia$Longitude,colonia$Latitude)) 
+  
+  tracks_spatial<-GPSdata
+  
+  tracks_spatial$lat<-tracks_spatial$Latitude
+  tracks_spatial$lon<-tracks_spatial$Longitude
+  
+  coordinates(tracks_spatial)<-~lon+lat
+  
+  meters_spatial<-(geosphere::distm(tracks_spatial,colonia_spatial,fun = geosphere::distHaversine))
+  meters_spatial<-cbind(meters_spatial,meters_spatial)
+  meters_spatial$Km<-meters_spatial$meters_spatial/1000
+  
+  returns(meters_spatial)
+}
+```
+
+```{r}
+obtain_maxdist(GPSdata = GPSdata, Colonydata=Colonydata)
+```
+
+
+Calcular distancia maxima de la colonia
+
+
+```{r, eval=FALSE, echo=FALSE}
+DistanciaColonia<-TracksDist %>%
+  group_by(TagID) %>%
+   summarise_at(c("Km"), max, na.rm = TRUE)
+```
+
+```{r}
+
+max_dist<-TracksIb %>% 
+         group_by(TracksXID) %>%
+         summarise(max=max(Kilometros))
+```
+
+Calcular duracion del viaje
+```{r, eval=FALSE, echo=FALSE}
+difftime(Track$DateTime[k], Track$DateTime[i], units="hours")
+```
+
+Calcular distancia total recorrida
+```{r, eval=FALSE, echo=FALSE}
+Metros<-(distm(TracksSp,MiColonia,fun = distHaversine))
+DistanciaColonia<-TracksDist %>%
+  group_by(TagID) %>%
+   summarise_at(c("Km"), max, na.rm = TRUE)
+```
+
+```{r}
+total.dist <- function(x,y) {
+  sum(sqrt((x-lag(x))^2+(y-lag(y))^2),na.rm=TRUE)
+}
+```
+
+```{r}
+total_dist<-TracksIb %>% 
+  group_by(TracksXID) %>% 
+  summarise(total_dist=total.dist(Longitude,Latitude)*100)
+```
+
+Create table
+```{r}
+
+```
 

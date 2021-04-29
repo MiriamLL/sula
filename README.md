@@ -3,8 +3,6 @@
 
 # sula <img src="man/figures/logo.png" align="right" width = "120px"/>
 
-<!-- badges: start -->
-<!-- badges: end -->
 Este paquete contiene datos de tracks de kena (*Sula dactylatra*)
 colectados en Rapa Nui  
 <h1>
@@ -20,12 +18,7 @@ Puedes instalar este paquete desde [GitHub](https://github.com/) usando:
 devtools::install_github("MiriamLL/sula")
 ```
 
-## Usos
-
-Por el momento el paquete solo contiene datos  
-Proximamente: Funciones para editar/corregir tus datos de GPS
-
-## Ejemplo
+# Datos
 
 Carga la libreria
 
@@ -36,12 +29,24 @@ library(sula)
 Carga los datos de GPS
 
 ``` r
-head(GPSdata)
-#>    Latitude Longitude    DateGMT  TimeGMT   IDs
-#> 1 -27.20097 -109.4531 02/11/2017 17:05:30 GPS01
-#> 2 -27.20084 -109.4531 02/11/2017 17:09:35 GPS01
-#> 3 -27.20053 -109.4529 02/11/2017 17:13:50 GPS01
-#> 4 -27.20092 -109.4531 02/11/2017 17:17:59 GPS01
-#> 5 -27.20065 -109.4529 02/11/2017 17:22:13 GPS01
-#> 6 -27.20061 -109.4528 02/11/2017 17:26:25 GPS01
+head(GPS_raw)
 ```
+
+# Funciones
+
+## ajustar\_hora 🕐
+
+Esta función corrige el tiempo de acuerdo a la zona horaria, necesitas
+incluir tus datos, definir la columna de hora y dia, el formato en el
+que estan y el numero de horas de diferencia.
+
+``` r
+GPS_corregido<-ajustar_hora(GPS_raw = GPS_raw,
+                            diferencia_horaria = 5,
+                            columna_dia = 'DateGMT',
+                            columna_hora = 'TimeGMT',
+                            formato="%d/%m/%Y %H:%M:%S")
+```
+
+Regresa un nuevo data frame con dos columnas adicionales: **dia\_hora**
+con el dia y fecha original y **hora\_corregida** con la nueva hora

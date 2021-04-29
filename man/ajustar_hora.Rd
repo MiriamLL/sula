@@ -2,23 +2,38 @@
 % Please edit documentation in R/ajustar_hora.R
 \name{ajustar_hora}
 \alias{ajustar_hora}
-\title{Corrige la hora en tu base de datos}
+\title{Corrige el tiempo de acuerdo a la zona horaria.}
 \usage{
-ajustar_hora(datos, columna, diferencia_horaria)
+ajustar_hora(
+  GPS_raw = GPS_raw,
+  dif_hor = dif_hor,
+  col_dia = col_dia,
+  col_hora = col_hora,
+  formato = formato
+)
 }
 \arguments{
-\item{datos}{Un data frame que contenga una columna que tenga datos en POSIXct}
+\item{GPS_raw}{tu data frame con columna de hora y tiempo}
 
-\item{columna}{Columna con fecha y hora, para convertir hay que pegar la columa dia y hora y usar la funcion as.POSIXct}
+\item{dif_hor}{un numero correspondiente a la diferencia horaria}
 
-\item{diferencia_horaria}{El numero de horas de diferencia}
+\item{col_dia}{el nombre de la columna donde tienes la fecha}
+
+\item{col_hora}{el nombre de la columna donde tienes el tiempo}
+
+\item{formato}{el formato en el que esta tu fecha y hora}
 }
 \value{
-Regresa un nuevo data frame con el nombre 'horas_corregidas'
+un data frame con dos columnas adicionales dia_hora y hora_corregida
 }
 \description{
-Corrige la hora en tu base de datos
+Corrige el tiempo de acuerdo a la zona horaria.
 }
 \examples{
-ajustar_hora(datos=GPSdata2, columna=diahora,diferencia_horaria=5)
+t_formato="\%d/\%m/\%Y \%H:\%M:\%S"
+GPS_gmt<-ajustar_hora(GPS_raw = GPS_raw, 
+dif_hor = 5,
+col_dia = 'DateGMT',
+col_hora = 'TimeGMT',
+formato=t_formato)
 }
