@@ -89,6 +89,12 @@ Agrega una columna con el número del viaje y elimina locaciones dentro de el ra
 ```{r, echo=TRUE, eval=FALSE, warnings=FALSE}
 GPS_edited<-contar_viajes(GPS_trip=GPS_trip)
 ```
+
+## dist_colonia 📏
+Calcula la distancia de la colonia de cada punto.
+```{r, echo=TRUE, eval=FALSE, warnings=FALSE}
+GPS_dist<-dist_colonia(GPS_edited = GPS_edited, nest_loc=nest_loc)
+```
 Regresa el mismo data frame con una nueva columna llamada 'maxdist_km'
 
 

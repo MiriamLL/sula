@@ -104,4 +104,12 @@ de el radio de la colonia.
 GPS_edited<-contar_viajes(GPS_trip=GPS_trip)
 ```
 
+## dist\_colonia 📏
+
+Calcula la distancia de la colonia de cada punto.
+
+``` r
+GPS_dist<-dist_colonia(GPS_edited = GPS_edited, nest_loc=nest_loc)
+```
+
 Regresa el mismo data frame con una nueva columna llamada ‘maxdist\_km’
