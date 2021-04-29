@@ -72,15 +72,21 @@ nest_loc<-localizar_nido(GPS_track = GPS_01,
 ```
 Regresa un nuevo data frame con dos columnas: Latitude y Longitude.  Recuerda: Asume que los datos del nido corresponde al primer registro de GPS. 
 
-## identificar_viajes
+## identificar_viajes 🛩️
 Agrega una columna de acuerdo a distancia de la colonia para determinar si esta en un viaje de alimentación o dentro del parametro considerado como estar en el nido. 
 ```{r, echo=TRUE, eval=FALSE, warnings=FALSE}
-GPS_01_trips<-identificar_viajes(GPS_track=GPS_01,
+GPS_trip<-identificar_viajes(GPS_track=GPS_01,
                         nest_loc=nest_loc,
                         distance_km=0.01)
 ```
-En la columna llamada trip 0=dentro de la distancia considerada como dentro de la colonia, y 1=viaje de alimentación.
+En la columna llamada trip:  
+**N**=dentro de la distancia considerada como dentro de la colonia, y  
+**Y**=viaje de alimentación.
 
-## 
 
+## contar_viajes 🧮
+Agrega una columna con el número del viaje y elimina locaciones dentro de el radio de la colonia.
+```{r, echo=TRUE, eval=FALSE, warnings=FALSE}
+GPS_viajes<-contar_viajes(GPS_trip=GPS_trip)
+```
 
