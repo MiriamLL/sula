@@ -31,132 +31,46 @@ Puedes instalar este paquete desde [GitHub](https://github.com/) usando:
 devtools::install_github("MiriamLL/sula")
 ```
 
-### Usos
-
-Por el momento el paquete solo contiene datos    
-Proximamente: Funciones para editar/corregir tus datos de GPS    
-
-### Ejemplo
-
+# Datos
 Carga la libreria
 ```{r libreria}
 library(sula)
 ```
 
-Carga los datos de GPS
-```{r cargar datos}
-head(GPSdata)
+## Multiples individuos 👯‍
+Carga los datos de GPS de diez individuos.  
+**Nota** Las horas no estan corregidas.
+```{r cargar_diez, eval=FALSE}
+head(GPS_raw)
+```
+## Un individuo 💃🏽
+Carga los datos de GPS de un individuo.  
+**Nota** Incluye columna con fecha y hora en formato POSIXct
+```{r cargar_uno, eval=FALSE}
+head(GPS_01)
 ```
 
-## Funciones
-
-### Colony
-Identificar viajes
-Identifica cuando el ave esta a cierto rango de su colonia y agregar una columna con el numero del viaje
-
-Primero identifica el nido usando el primer valor del track.
-```{r}
-library(dplyr)
-coords_colony<-function(GPSdata=GPSdata,
-                        latitude_column=latitude_column,
-                        longitude_column=longitude_column){
-  
-  data<-GPSdata
-  var1<-longitude_column
-  var2<-latitude_column
-  
-  Colonydata<-GPSdata %>%
-    dplyr::summarise(
-      Longitude = dplyr::first(.data[[var1]]),
-      Latitude  = dplyr::first(.data[[var2]]), )
-  return(Colonydata)
-}
+# Funciones
+## ajustar_hora 🕐
+Esta función corrige el tiempo de acuerdo a la zona horaria, necesitas incluir tus datos, definir la columna de hora y dia, el formato en el que estan y el numero de horas de diferencia.
+```{r, eval=FALSE}
+GPS_gmt<-ajustar_hora(GPS_raw = GPS_raw,
+                            dif_hor = 5,
+                            col_dia = 'DateGMT',
+                            col_hora = 'TimeGMT',
+                            formato="%d/%m/%Y %H:%M:%S")
 ```
+Regresa un nuevo data frame con dos columnas adicionales: **dia_hora** con el dia y fecha original y **hora_corregida** con la nueva hora
 
-```{r, eval=FALSE, echo=FALSE}
-Colonydata<-coords_colony(GPSdata = GPSdata,
-                             latitude_column="Latitude",
-                             longitude_column="Longitude")
+## localizar_nido 🐣
+Si no sabes las coordenadas del nido esta función usa el primer valor de los datos de GPS como punto de la colonia.
+Asume que los datos del nido corresponde al primer registro de GPS. 
+Esta función esta pensada para obtener datos de un solo individuo.
+```{r, eval=FALSE}
+nest_loc<-localizar_nido(GPS_track = GPS_01,
+                          lat_col="Latitude",
+                          lon_col="Longitude")
 ```
+Regresa un nuevo data frame con dos columnas: Latitude y Longitude.  
 
-### Maximum distance
-```{r, echo=FALSE, eval=FALSE}
-library(rgeos) #coordinates
-library(geosphere) #distm
-library(sp)
-```
-
-
-```{r, echo=FALSE, eval=FALSE}
-obtain_maxdist<-function(GPSdata=GPSdata,
-                         Colonydata=Colonydata){
-  
-  colonia<-Colonydata
-  colonia_spatial<- SpatialPoints(cbind(colonia$Longitude,colonia$Latitude)) 
-  
-  tracks_spatial<-GPSdata
-  
-  tracks_spatial$lat<-tracks_spatial$Latitude
-  tracks_spatial$lon<-tracks_spatial$Longitude
-  
-  coordinates(tracks_spatial)<-~lon+lat
-  
-  meters_spatial<-(geosphere::distm(tracks_spatial,colonia_spatial,fun = geosphere::distHaversine))
-  meters_spatial<-cbind(meters_spatial,meters_spatial)
-  meters_spatial$Km<-meters_spatial$meters_spatial/1000
-  
-  returns(meters_spatial)
-}
-```
-
-```{r}
-obtain_maxdist(GPSdata = GPSdata, Colonydata=Colonydata)
-```
-
-
-Calcular distancia maxima de la colonia
-
-
-```{r, eval=FALSE, echo=FALSE}
-DistanciaColonia<-TracksDist %>%
-  group_by(TagID) %>%
-   summarise_at(c("Km"), max, na.rm = TRUE)
-```
-
-```{r}
-
-max_dist<-TracksIb %>% 
-         group_by(TracksXID) %>%
-         summarise(max=max(Kilometros))
-```
-
-Calcular duracion del viaje
-```{r, eval=FALSE, echo=FALSE}
-difftime(Track$DateTime[k], Track$DateTime[i], units="hours")
-```
-
-Calcular distancia total recorrida
-```{r, eval=FALSE, echo=FALSE}
-Metros<-(distm(TracksSp,MiColonia,fun = distHaversine))
-DistanciaColonia<-TracksDist %>%
-  group_by(TagID) %>%
-   summarise_at(c("Km"), max, na.rm = TRUE)
-```
-
-```{r}
-total.dist <- function(x,y) {
-  sum(sqrt((x-lag(x))^2+(y-lag(y))^2),na.rm=TRUE)
-}
-```
-
-```{r}
-total_dist<-TracksIb %>% 
-  group_by(TracksXID) %>% 
-  summarise(total_dist=total.dist(Longitude,Latitude)*100)
-```
-
-Create table
-```{r}
-
-```
 
