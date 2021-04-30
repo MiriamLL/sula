@@ -48,7 +48,9 @@ head(GPS_raw)
 
 ## Un individuo
 
-### ajustar\_hora 🕐
+### Obtener informacion del viaje
+
+#### ajustar\_hora 🕐
 
 Esta función corrige el tiempo de acuerdo a la zona horaria, necesitas
 incluir tus datos, definir la columna de hora y día, el formato en el
@@ -65,7 +67,7 @@ GPS_gmt<-ajustar_hora(GPS_raw = GPS_raw,
 Regresa el mismo data frame con dos columnas adicionales: **dia\_hora**
 con el dia y fecha original y **hora\_corregida** con la nueva hora
 
-### localizar\_nido 🐣
+#### localizar\_nido 🐣
 
 Si no sabes las coordenadas del nido esta función usa el primer valor de
 los datos de GPS como punto de la colonia. Asume que los datos del nido
@@ -79,7 +81,7 @@ nest_loc<-localizar_nido(GPS_track = GPS_01,
 
 Regresa un nuevo data frame con dos columnas: Latitude y Longitude.
 
-### identificar\_viajes 🛩️
+#### identificar\_viajes 🛩️
 
 Agrega una columna de acuerdo a distancia de la colonia para determinar
 si esta en un viaje de alimentación o no.
@@ -95,7 +97,7 @@ En la columna llamada trip:
 y  
 **Y**=viaje de alimentación.
 
-### contar\_viajes 🧮
+#### contar\_viajes 🧮
 
 Agrega una columna con el número del viaje y elimina locaciones dentro
 de el radio de la colonia.
@@ -104,7 +106,7 @@ de el radio de la colonia.
 GPS_edited<-contar_viajes(GPS_trip=GPS_trip)
 ```
 
-### dist\_colonia 📏
+#### dist\_colonia 📏
 
 Agrega una columna con la distancia de la colonia de cada punto.  
 **Nota** usa CRS: 4326
@@ -115,7 +117,7 @@ GPS_dist<-dist_colonia(GPS_edited = GPS_edited, nest_loc=nest_loc)
 
 Regresa el mismo data frame con una nueva columna llamada ‘maxdist\_km’
 
-### dist\_puntos 📐
+#### dist\_puntos 📐
 
 Agrega una columna con la distancia entre cada punto.  
 **Nota** usa CRS: 4326
@@ -128,4 +130,18 @@ Regresa el mismo data frame con una nueva columna llamada
 ‘pointsdist\_km’.  
 Incluye NAs al inicio del viaje.
 
-### duracion\_viaje ⏳
+### Obtener parametros de los viajes
+
+#### calcular\_duracion ⏳
+
+Identifica el inicio y el final del viaje y calcula la duracion.
+
+``` r
+duracion<-calcular_duracion(GPS_edited = GPS_edited,
+                              col_diahora = "tStamp",
+                              formato = "%Y-%m-%d %H:%M:%S",
+                              unidades="hours")
+```
+
+Regresa un nuevo data frame con 4 columnas: trip\_id, trip\_start,
+trip\_end y duration.

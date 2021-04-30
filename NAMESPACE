@@ -2,6 +2,7 @@
 
 export("%>%")
 export(ajustar_hora)
+export(calcular_duracion)
 export(contar_viajes)
 export(dist_colonia)
 export(dist_puntos)
