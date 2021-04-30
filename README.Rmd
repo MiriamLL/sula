@@ -131,5 +131,11 @@ totaldist_km<-calcular_totaldist(GPS_edited = GPS_edited)
 ```
 Regresa un nuevo data frame con la distancia total recorrida por viaje.
 
-
+#### calcular_maxdist 📏
+Obtiene la distancia maxima de la colonia por viaje.  
+Debe contener la columna Longitude y Latitude.  
+```{r, eval=FALSE}
+maxdist_km<-calcular_maxdist(GPS_edited = GPS_edited, nest_loc=nest_loc)
+```
+Regresa un nuevo data frame con la distancia maxima de la colonia por viaje.
 

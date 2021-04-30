@@ -7,7 +7,7 @@
 calcular_totaldist(GPS_edited = GPS_edited)
 }
 \arguments{
-\item{GPS_edited}{un data frame con con datos de Longitude y Latitude}
+\item{GPS_edited}{un data frame con datos de Longitude y Latitude}
 }
 \value{
 regresa un nuevo data frame con la distancia total recorrida por viaje.

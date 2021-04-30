@@ -8,7 +8,7 @@
 #' @examples totaldist_km<-calcular_totaldist(GPS_edited = GPS_edited)
 calcular_totaldist<-function(GPS_edited = GPS_edited){
   
-  # obtener distancia entre puntos
+  
   Viajes_df<-as.data.frame(GPS_edited)
   
   #separa los viajes

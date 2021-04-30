@@ -3,6 +3,7 @@
 export("%>%")
 export(ajustar_hora)
 export(calcular_duracion)
+export(calcular_maxdist)
 export(calcular_totaldist)
 export(contar_viajes)
 export(dist_colonia)
