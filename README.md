@@ -145,3 +145,14 @@ duracion<-calcular_duracion(GPS_edited = GPS_edited,
 
 Regresa un nuevo data frame con 4 columnas: trip\_id, trip\_start,
 trip\_end y duration.
+
+#### calcular\_totaldist 📐
+
+Calcula distancia recorrida de la colonia por viaje.  
+Debe contener la columna Longitude y Latitude.
+
+``` r
+totaldist_km<-calcular_totaldist(GPS_edited = GPS_edited)
+```
+
+Regresa un nuevo data frame con la distancia total recorrida por viaje.
