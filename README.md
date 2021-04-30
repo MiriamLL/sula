@@ -3,11 +3,10 @@
 
 # sula <img src="man/figures/logo.png" align="right" width = "120px"/>
 
+[![DOI](https://zenodo.org/badge/354821022.svg)](https://zenodo.org/badge/latestdoi/354821022)
+
 Este paquete contiene datos de tracks de kena (*Sula dactylatra*)
-colectados en Rapa Nui  
-<h1>
-🗿
-</h1>
+colectados en Rapa Nui 🗿
 
 ## Instalación
 
@@ -38,7 +37,8 @@ head(GPS_01)
 ## Multiples individuos 👯‍
 
 Carga los datos de GPS de diez individuos.  
-**Nota** Los datos no estan en formato. Las horas no estan corregidas.
+**Nota** Los datos no están transformados a la clase correspondiente, y
+las horas no están corregidas.
 
 ``` r
 head(GPS_raw)
@@ -65,7 +65,7 @@ GPS_gmt<-ajustar_hora(GPS_raw = GPS_raw,
 ```
 
 Regresa el mismo data frame con dos columnas adicionales: **dia\_hora**
-con el dia y fecha original y **hora\_corregida** con la nueva hora
+con el día y fecha original y **hora\_corregida** con la nueva hora
 
 #### localizar\_nido 🐣
 
@@ -89,7 +89,7 @@ si esta en un viaje de alimentación o no.
 ``` r
 GPS_trip<-identificar_viajes(GPS_track=GPS_01,
                         nest_loc=nest_loc,
-                        distance_km=0.01)
+                        distancia_km=1)
 ```
 
 En la columna llamada trip:  
@@ -159,19 +159,19 @@ Regresa un nuevo data frame con la distancia total recorrida por viaje.
 
 #### calcular\_maxdist 📏
 
-Obtiene la distancia maxima de la colonia por viaje.  
+Obtiene la distancia máxima de la colonia por viaje.  
 Debe contener la columna Longitude y Latitude.
 
 ``` r
 maxdist_km<-calcular_maxdist(GPS_edited = GPS_edited, nest_loc=nest_loc)
 ```
 
-Regresa un nuevo data frame con la distancia maxima de la colonia por
+Regresa un nuevo data frame con la distancia máxima de la colonia por
 viaje.
 
 #### calcular\_tripparams 📐⏳📏
 
-Calcula la duracion de los viajes, la distancia maxima de la colonia y
+Calcula la duración de los viajes, la distancia máxima de la colonia y
 la distancia total recorrida.
 
 ``` r
@@ -181,4 +181,16 @@ trip_params<-calcular_tripparams(GPS_edited = GPS_edited,
                               nest_loc=nest_loc)
 ```
 
-Regresa un nuevo data frame con los parametros por viaje.
+Regresa un nuevo data frame con los parámetros por viaje.
+
+# Citar
+
+-   Lerma M (2021) Package sula. Zenodo.
+    <http://doi.org/10.5281/zenodo.4682898>
+
+Los datos de prueba vienen de esa publicación. 🔓 - Lerma M, Dehnhard N,
+Luna-Jorquera G, Voigt CC, Garthe S (2020) Breeding stage, not sex,
+affects foraging characteristics in masked boobies at Rapa Nui.
+Behavioral ecology and sociobiology 74: 149.
+
+[![DOI](https://zenodo.org/badge/354821022.svg)](https://zenodo.org/badge/latestdoi/354821022)

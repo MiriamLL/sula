@@ -20,4 +20,5 @@ Imports:
     sp,
     geosphere,
     rgdal,
-    tidyr
+    tidyr,
+    methods

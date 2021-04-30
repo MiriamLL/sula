@@ -7,7 +7,7 @@
 identificar_viajes(
   GPS_track = GPS_track,
   nest_loc = nest_loc,
-  distance_km = 0.01
+  distancia_km = 1
 )
 }
 \arguments{
@@ -15,7 +15,7 @@ identificar_viajes(
 
 \item{nest_loc}{es un data frame con las columnas Latitude y Longitude}
 
-\item{distance_km}{un numero de acuerdo al buffer de interes}
+\item{distancia_km}{un numero de acuerdo al buffer de interes}
 }
 \value{
 el data frame con una columna adicional
@@ -24,6 +24,6 @@ el data frame con una columna adicional
 Agrega columna identificando viajes
 }
 \examples{
-nest_loc<-data.frame(Longitude   = -109.4531, Latitude   = -27.20097)
-GPS_01_trips<-identificar_viajes(GPS_track=GPS_01,nest_loc=nest_loc,distance_km=0.01)
+nest_loc<-data.frame(Longitude=-109.4531, Latitude=-27.20097)
+GPS_01_trips<-identificar_viajes(GPS_track=GPS_01,nest_loc=nest_loc,distancia_km=0.01)
 }
