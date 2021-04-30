@@ -168,3 +168,17 @@ maxdist_km<-calcular_maxdist(GPS_edited = GPS_edited, nest_loc=nest_loc)
 
 Regresa un nuevo data frame con la distancia maxima de la colonia por
 viaje.
+
+#### calcular\_tripparams 📐⏳📏
+
+Calcula la duracion de los viajes, la distancia maxima de la colonia y
+la distancia total recorrida.
+
+``` r
+trip_params<-calcular_tripparams(GPS_edited = GPS_edited,
+                              col_diahora = "tStamp",
+                              formato = "%Y-%m-%d %H:%M:%S",
+                              nest_loc=nest_loc)
+```
+
+Regresa un nuevo data frame con los parametros por viaje.
