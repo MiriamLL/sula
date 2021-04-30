@@ -26,7 +26,7 @@ Este paquete contiene datos de tracks de kena (_Sula dactylatra_) colectados en 
 
 Puedes instalar este paquete desde [GitHub](https://github.com/) usando:
 
-``` r
+```{r, eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("MiriamLL/sula")
 ```
@@ -37,12 +37,6 @@ Carga la libreria
 library(sula)
 ```
 
-## Multiples individuos 👯‍
-Carga los datos de GPS de diez individuos.  
-**Nota** Las horas no estan corregidas.
-```{r cargar_diez, eval=FALSE}
-head(GPS_raw)
-```
 ## Un individuo 💃🏽
 Carga los datos de GPS de un individuo.  
 **Nota** Incluye columna con fecha y hora en formato POSIXct
@@ -50,9 +44,18 @@ Carga los datos de GPS de un individuo.
 head(GPS_01)
 ```
 
+## Multiples individuos 👯‍
+Carga los datos de GPS de diez individuos.  
+**Nota** Los datos no estan en formato. Las horas no estan corregidas.
+```{r cargar_diez, eval=FALSE}
+head(GPS_raw)
+```
+
+
 # Funciones
-## ajustar_hora 🕐
-Esta función corrige el tiempo de acuerdo a la zona horaria, necesitas incluir tus datos, definir la columna de hora y dia, el formato en el que estan y el numero de horas de diferencia.
+## Un individuo
+### ajustar_hora 🕐
+Esta función corrige el tiempo de acuerdo a la zona horaria, necesitas incluir tus datos, definir la columna de hora y día, el formato en el que están y el numero de horas de diferencia.
 ```{r, eval=FALSE}
 GPS_gmt<-ajustar_hora(GPS_raw = GPS_raw,
                             dif_hor = 5,
@@ -62,39 +65,56 @@ GPS_gmt<-ajustar_hora(GPS_raw = GPS_raw,
 ```
 Regresa el mismo data frame con dos columnas adicionales: **dia_hora** con el dia y fecha original y **hora_corregida** con la nueva hora
 
-## localizar_nido 🐣
+### localizar_nido 🐣
 Si no sabes las coordenadas del nido esta función usa el primer valor de los datos de GPS como punto de la colonia.
-Esta función esta pensada para obtener datos de un solo individuo.
+Asume que los datos del nido corresponde al primer registro de GPS. 
 ```{r, eval=FALSE}
 nest_loc<-localizar_nido(GPS_track = GPS_01,
                           lat_col="Latitude",
                           lon_col="Longitude")
 ```
-Regresa un nuevo data frame con dos columnas: Latitude y Longitude.  Recuerda: Asume que los datos del nido corresponde al primer registro de GPS. 
+Regresa un nuevo data frame con dos columnas: Latitude y Longitude. 
 
-## identificar_viajes 🛩️
-Agrega una columna de acuerdo a distancia de la colonia para determinar si esta en un viaje de alimentación o dentro del parametro considerado como estar en el nido. 
+### identificar_viajes 🛩️
+Agrega una columna de acuerdo a distancia de la colonia para determinar si esta en un viaje de alimentación o no. 
 ```{r, echo=TRUE, eval=FALSE, warnings=FALSE}
 GPS_trip<-identificar_viajes(GPS_track=GPS_01,
                         nest_loc=nest_loc,
                         distance_km=0.01)
 ```
 En la columna llamada trip:  
-**N**=dentro de la distancia considerada como dentro de la colonia, y  
+**N**=dentro de la distancia considerada como no viaje de alimentación, y  
 **Y**=viaje de alimentación.
 
 
-## contar_viajes 🧮
+### contar_viajes 🧮
 Agrega una columna con el número del viaje y elimina locaciones dentro de el radio de la colonia.
 ```{r, echo=TRUE, eval=FALSE, warnings=FALSE}
 GPS_edited<-contar_viajes(GPS_trip=GPS_trip)
 ```
 
-## dist_colonia 📏
-Calcula la distancia de la colonia de cada punto.
+### dist_colonia 📏
+Agrega una columna con la distancia de la colonia de cada punto.  
+**Nota** usa CRS: 4326
 ```{r, echo=TRUE, eval=FALSE, warnings=FALSE}
 GPS_dist<-dist_colonia(GPS_edited = GPS_edited, nest_loc=nest_loc)
 ```
 Regresa el mismo data frame con una nueva columna llamada 'maxdist_km'
+
+### dist_puntos 📐
+Agrega una columna con la distancia entre cada punto.  
+**Nota** usa CRS: 4326
+```{r, echo=TRUE, eval=FALSE, warnings=FALSE}
+GPS_dist<-dist_puntos(GPS_edited = GPS_edited)
+```
+Regresa el mismo data frame con una nueva columna llamada 'pointsdist_km'.  
+Incluye NAs al inicio del viaje.
+
+### duracion_viaje ⏳
+```{r}
+
+```
+
+
 
 
