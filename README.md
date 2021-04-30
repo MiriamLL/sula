@@ -188,9 +188,7 @@ Regresa un nuevo data frame con los parámetros por viaje.
 -   Lerma M (2021) Package sula. Zenodo.
     <http://doi.org/10.5281/zenodo.4682898>
 
-Los datos de prueba vienen de esa publicación. 🔓 - Lerma M, Dehnhard N,
-Luna-Jorquera G, Voigt CC, Garthe S (2020) Breeding stage, not sex,
-affects foraging characteristics in masked boobies at Rapa Nui.
-Behavioral ecology and sociobiology 74: 149.
+Los datos de prueba vienen de esa publicación. OpenAccess 🔓  
+- Lerma M, Dehnhard N, Luna-Jorquera G, Voigt CC, Garthe S (2020) Breeding stage, not sex, affects foraging characteristics in masked boobies at Rapa Nui. Behavioral ecology and sociobiology 74: 149.
 
 [![DOI](https://zenodo.org/badge/354821022.svg)](https://zenodo.org/badge/latestdoi/354821022)
