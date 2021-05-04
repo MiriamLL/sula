@@ -5,21 +5,21 @@
 \title{Corrige el tiempo de acuerdo a la zona horaria.}
 \usage{
 ajustar_hora(
-  GPS_raw = GPS_raw,
+  GPS_data = GPS_data,
   dif_hor = dif_hor,
-  col_dia = col_dia,
-  col_hora = col_hora,
+  dia_col = dia_col,
+  hora_col = hora_col,
   formato = formato
 )
 }
 \arguments{
-\item{GPS_raw}{tu data frame con columna de hora y tiempo}
+\item{GPS_data}{tu data frame con columna de hora y tiempo}
 
 \item{dif_hor}{un numero correspondiente a la diferencia horaria}
 
-\item{col_dia}{el nombre de la columna donde tienes la fecha}
+\item{dia_col}{el nombre de la columna donde tienes la fecha}
 
-\item{col_hora}{el nombre de la columna donde tienes el tiempo}
+\item{hora_col}{el nombre de la columna donde tienes el tiempo}
 
 \item{formato}{el formato en el que esta tu fecha y hora}
 }
@@ -31,9 +31,9 @@ Corrige el tiempo de acuerdo a la zona horaria.
 }
 \examples{
 t_formato="\%d/\%m/\%Y \%H:\%M:\%S"
-GPS_gmt<-ajustar_hora(GPS_raw = GPS_raw, 
+GPS_gmt<-ajustar_hora(GPS_data = GPS_raw, 
 dif_hor = 5,
-col_dia = 'DateGMT',
-col_hora = 'TimeGMT',
+dia_col = 'DateGMT',
+hora_col = 'TimeGMT',
 formato=t_formato)
 }

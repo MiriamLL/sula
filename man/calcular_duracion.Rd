@@ -2,17 +2,17 @@
 % Please edit documentation in R/calcular_duracion.R
 \name{calcular_duracion}
 \alias{calcular_duracion}
-\title{Title}
+\title{Calcula la duracion de los viajes de alimentacion}
 \usage{
 calcular_duracion(
-  GPS_edited = GPS_edited,
+  GPS_data = GPS_data,
   col_diahora = col_diahora,
   formato = formato,
   unidades = unidades
 )
 }
 \arguments{
-\item{GPS_edited}{un data frame con una columna que incluya dia y hora, y otra columna que incluya el numero del viaje}
+\item{GPS_data}{un data frame con una columna que incluya dia y hora, y otra columna que incluya el numero del viaje}
 
 \item{col_diahora}{la columna en formato POSTIXct con informacion del dia y hora}
 
@@ -24,10 +24,10 @@ calcular_duracion(
 regresa un nuevo data frame con la informacion del viaje, cuando inicio, cuando termino y la duracion
 }
 \description{
-Title
+Calcula la duracion de los viajes de alimentacion
 }
 \examples{
 formato<-"\%Y-\%m-\%d \%H:\%M:\%S"
-duracion<-calcular_duracion(GPS_edited=GPS_edited,col_diahora="tStamp",
+duracion<-calcular_duracion(GPS_data=GPS_edited,col_diahora="tStamp",
 formato=formato,unidades="hours")
 }

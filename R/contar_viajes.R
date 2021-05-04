@@ -1,14 +1,14 @@
 #' Cuenta viajes y elimina periodos que no sean viajes de alimentacion
 #'
-#' @param GPS_trip un data frame con una columna llamada trip que incluya Y o N
+#' @param GPS_data un data frame con una columna llamada trip que incluya Y o N
 #'
 #' @return un data frame con una columna con trip_number, num_seq y solo las locaciones fuera de la colonia
 #' @export
 #'
-#' @examples GPS_viaje<-contar_viajes(GPS_trip=GPS_trip)
-contar_viajes<-function(GPS_trip=GPS_trip){
+#' @examples GPS_viaje<-contar_viajes(GPS_data=GPS_trip)
+contar_viajes<-function(GPS_data=GPS_data){
   
-  trip_data<-GPS_trip
+  trip_data<-GPS_data
   
   #add secuence
   num_seq<-nrow(trip_data)

@@ -4,10 +4,10 @@
 \alias{calcular_totaldist}
 \title{Calcula distancia recorrida de la colonia por viaje}
 \usage{
-calcular_totaldist(GPS_edited = GPS_edited)
+calcular_totaldist(GPS_data = GPS_data)
 }
 \arguments{
-\item{GPS_edited}{un data frame con datos de Longitude y Latitude}
+\item{GPS_data}{un data frame con datos de Longitude y Latitude}
 }
 \value{
 regresa un nuevo data frame con la distancia total recorrida por viaje.
@@ -16,5 +16,5 @@ regresa un nuevo data frame con la distancia total recorrida por viaje.
 Calcula distancia recorrida de la colonia por viaje
 }
 \examples{
-totaldist_km<-calcular_totaldist(GPS_edited = GPS_edited)
+totaldist_km<-calcular_totaldist(GPS_data = GPS_edited)
 }

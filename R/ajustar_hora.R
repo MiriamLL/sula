@@ -1,9 +1,9 @@
 #' Corrige el tiempo de acuerdo a la zona horaria.
 #'
-#' @param GPS_raw tu data frame con columna de hora y tiempo
+#' @param GPS_data tu data frame con columna de hora y tiempo
 #' @param dif_hor un numero correspondiente a la diferencia horaria
-#' @param col_dia el nombre de la columna donde tienes la fecha
-#' @param col_hora el nombre de la columna donde tienes el tiempo
+#' @param dia_col el nombre de la columna donde tienes la fecha
+#' @param hora_col el nombre de la columna donde tienes el tiempo
 #' @param formato el formato en el que esta tu fecha y hora
 #'
 #' @return un data frame con dos columnas adicionales dia_hora y hora_corregida
@@ -11,20 +11,20 @@
 #'
 #' @examples 
 #' t_formato="%d/%m/%Y %H:%M:%S"
-#' GPS_gmt<-ajustar_hora(GPS_raw = GPS_raw, 
+#' GPS_gmt<-ajustar_hora(GPS_data = GPS_raw, 
 #' dif_hor = 5,
-#' col_dia = 'DateGMT',
-#' col_hora = 'TimeGMT',
+#' dia_col = 'DateGMT',
+#' hora_col = 'TimeGMT',
 #' formato=t_formato)
-ajustar_hora <- function(GPS_raw=GPS_raw, 
+ajustar_hora <- function(GPS_data=GPS_data, 
                          dif_hor=dif_hor,
-                         col_dia=col_dia,
-                         col_hora=col_hora,
+                         dia_col=dia_col,
+                         hora_col=hora_col,
                          formato=formato){
   
-  data<-GPS_raw
+  data<-GPS_data
   
-  data$dia_hora<-paste(data[[col_dia]],data[[col_hora]])
+  data$dia_hora<-paste(data[[dia_col]],data[[hora_col]])
   
   data$dia_hora<- as.POSIXct(strptime(as.character(data$dia_hora),
                                       formato), "GMT")

@@ -4,10 +4,10 @@
 \alias{localizar_nido}
 \title{Localiza las coordenadas donde esta el nido}
 \usage{
-localizar_nido(GPS_track = GPS_track, lon_col = lon_col, lat_col = lat_col)
+localizar_nido(GPS_data = GPS_data, lon_col = lon_col, lat_col = lat_col)
 }
 \arguments{
-\item{GPS_track}{data frame con los datos de GPS debe contener columna de latitud y de longitud en formato numerico.}
+\item{GPS_data}{data frame con los datos de GPS debe contener columna de latitud y de longitud en formato numerico.}
 
 \item{lon_col}{nombre de la columna de longitud}
 
@@ -20,5 +20,5 @@ un data frame con la coordenada del nido para ese individuo
 Localiza las coordenadas donde esta el nido
 }
 \examples{
-nest_loc<-localizar_nido(GPS_track = GPS_01,lat_col="Latitude",lon_col="Longitude")
+nest_loc<-localizar_nido(GPS_data = GPS_01,lat_col="Latitude",lon_col="Longitude")
 }

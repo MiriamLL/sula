@@ -4,10 +4,10 @@
 \alias{dist_puntos}
 \title{Agrega una columna con la distancia entre cada punto.}
 \usage{
-dist_puntos(GPS_edited = GPS_edited)
+dist_puntos(GPS_data = GPS_data)
 }
 \arguments{
-\item{GPS_edited}{es un data frame con datos de Longitude y Latitude}
+\item{GPS_data}{es un data frame con datos de Longitude y Latitude}
 }
 \value{
 el mismo data frame con una columna llamada pointsdist_km
@@ -16,5 +16,5 @@ el mismo data frame con una columna llamada pointsdist_km
 Agrega una columna con la distancia entre cada punto.
 }
 \examples{
-GPS_dist<-dist_puntos(GPS_edited = GPS_edited)
+GPS_dist<-dist_puntos(GPS_data = GPS_edited)
 }

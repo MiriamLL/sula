@@ -4,10 +4,10 @@
 \alias{contar_viajes}
 \title{Cuenta viajes y elimina periodos que no sean viajes de alimentacion}
 \usage{
-contar_viajes(GPS_trip = GPS_trip)
+contar_viajes(GPS_data = GPS_data)
 }
 \arguments{
-\item{GPS_trip}{un data frame con una columna llamada trip que incluya Y o N}
+\item{GPS_data}{un data frame con una columna llamada trip que incluya Y o N}
 }
 \value{
 un data frame con una columna con trip_number, num_seq y solo las locaciones fuera de la colonia
@@ -16,5 +16,5 @@ un data frame con una columna con trip_number, num_seq y solo las locaciones fue
 Cuenta viajes y elimina periodos que no sean viajes de alimentacion
 }
 \examples{
-GPS_viaje<-contar_viajes(GPS_trip=GPS_trip)
+GPS_viaje<-contar_viajes(GPS_data=GPS_trip)
 }

@@ -1,15 +1,15 @@
 #' Calcula distancia recorrida de la colonia por viaje
 #'
-#' @param GPS_edited un data frame con datos de Longitude y Latitude
+#' @param GPS_data un data frame con datos de Longitude y Latitude
 #'
 #' @return regresa un nuevo data frame con la distancia total recorrida por viaje.
 #' @export
 #'
-#' @examples totaldist_km<-calcular_totaldist(GPS_edited = GPS_edited)
-calcular_totaldist<-function(GPS_edited = GPS_edited){
+#' @examples totaldist_km<-calcular_totaldist(GPS_data = GPS_edited)
+calcular_totaldist<-function(GPS_data = GPS_data){
   
   
-  Viajes_df<-as.data.frame(GPS_edited)
+  Viajes_df<-as.data.frame(GPS_data)
   
   #separa los viajes
   Viajes_list<-split(Viajes_df,Viajes_df$trip_number)

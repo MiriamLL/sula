@@ -1,6 +1,6 @@
 #' Agrega columna identificando viajes
 #'
-#' @param GPS_track es el data frame con datos de GPS con las columnas Latitude y Longitude
+#' @param GPS_data es el data frame con datos de GPS con las columnas Latitude y Longitude
 #' @param nest_loc es un data frame con las columnas Latitude y Longitude
 #' @param distancia_km un numero de acuerdo al buffer de interes
 #'
@@ -8,13 +8,13 @@
 #' @export
 #' 
 #' @examples nest_loc<-data.frame(Longitude=-109.4531, Latitude=-27.20097)
-#' GPS_01_trips<-identificar_viajes(GPS_track=GPS_01,nest_loc=nest_loc,distancia_km=0.01)
-identificar_viajes<-function(GPS_track=GPS_track,
+#' GPS_01_trips<-identificar_viajes(GPS_data=GPS_01,nest_loc=nest_loc,distancia_km=0.01)
+identificar_viajes<-function(GPS_data=GPS_data,
                              nest_loc=nest_loc,
                              distancia_km=1){
   
   # tracks
-  track_df<-as.data.frame(GPS_track)
+  track_df<-as.data.frame(GPS_data)
   track_spatial<-track_df
   track_spatial$lat<-track_spatial$Latitude
   track_spatial$lon<-track_spatial$Longitude

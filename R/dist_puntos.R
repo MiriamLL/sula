@@ -1,14 +1,14 @@
 #' Agrega una columna con la distancia entre cada punto. 
 #'
-#' @param GPS_edited es un data frame con datos de Longitude y Latitude
+#' @param GPS_data es un data frame con datos de Longitude y Latitude
 #'
 #' @return el mismo data frame con una columna llamada pointsdist_km
 #' @export
 #'
-#' @examples GPS_dist<-dist_puntos(GPS_edited = GPS_edited)
-dist_puntos<-function(GPS_edited = GPS_edited){
+#' @examples GPS_dist<-dist_puntos(GPS_data = GPS_edited)
+dist_puntos<-function(GPS_data = GPS_data){
   
-  Viajes_df<-as.data.frame(GPS_edited)
+  Viajes_df<-as.data.frame(GPS_data)
   
   #separa los viajes
   Viajes_list<-split(Viajes_df,Viajes_df$trip_number)

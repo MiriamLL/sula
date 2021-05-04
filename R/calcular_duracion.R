@@ -1,6 +1,6 @@
-#' Title
+#' Calcula la duracion de los viajes de alimentacion
 #'
-#' @param GPS_edited un data frame con una columna que incluya dia y hora, y otra columna que incluya el numero del viaje
+#' @param GPS_data un data frame con una columna que incluya dia y hora, y otra columna que incluya el numero del viaje
 #' @param col_diahora la columna en formato POSTIXct con informacion del dia y hora
 #' @param formato el formato en el que esta la hora y dia en la columna POSTIXct con informacion del dia y hora
 #' @param unidades elegir "hours", "minutes", "seconds".
@@ -9,15 +9,15 @@
 #' @export
 #'
 #' @examples formato<-"%Y-%m-%d %H:%M:%S"
-#' duracion<-calcular_duracion(GPS_edited=GPS_edited,col_diahora="tStamp",
+#' duracion<-calcular_duracion(GPS_data=GPS_edited,col_diahora="tStamp",
 #' formato=formato,unidades="hours")
-calcular_duracion<-function(GPS_edited = GPS_edited,
+calcular_duracion<-function(GPS_data = GPS_data,
                             col_diahora=col_diahora,
                             formato=formato,
                             unidades=unidades){
   
   
-  Viajes_list<-split(GPS_edited,GPS_edited$trip_number)
+  Viajes_list<-split(GPS_data,GPS_data$trip_number)
   
   Horas_list<-list()
   

@@ -5,18 +5,18 @@
 \title{Calcula los parametros del viaje de alimentacion}
 \usage{
 calcular_tripparams(
-  GPS_edited = GPS_edited,
-  col_diahora = col_diahora,
+  GPS_data = GPS_data,
+  diahora_col = diahora_col,
   formato = formato,
   nest_loc = nest_loc
 )
 }
 \arguments{
-\item{GPS_edited}{es un data frame con tus datos, debe contener columnas 'Longitude','Latitude' y una columna en formato POSTIXct}
+\item{GPS_data}{es un data frame con tus datos, debe contener columnas 'Longitude','Latitude', trip_number y dia_horacol que es una columna en formato POSTIXct}
 
-\item{col_diahora}{una columna en formato POSTIXct}
+\item{diahora_col}{una columna en formato POSTIXct}
 
-\item{formato}{el formato en el que esta la col_diahora}
+\item{formato}{el formato en el que esta la diahora_col}
 
 \item{nest_loc}{un data frame con las coordenadas del nido 'Longitude','Latitude'}
 }
@@ -28,8 +28,8 @@ Calcula los parametros del viaje de alimentacion
 }
 \examples{
 nest_loc=data.frame(Longitude = -109.4531,Latitude = -27.20097)
-trip_params<-calcular_tripparams(GPS_edited = GPS_edited,
-col_diahora = "tStamp",
+trip_params<-calcular_tripparams(GPS_data = GPS_edited,
+diahora_col = "tStamp",
 formato = "\%Y-\%m-\%d \%H:\%M:\%S",
 nest_loc=nest_loc)
 }

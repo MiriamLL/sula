@@ -1,18 +1,18 @@
 #' Calcular la distancia maxima de la colonia por viaje
 #'
-#' @param GPS_edited un data frame con las columnas 'Longitude' y 'Latitude'
+#' @param GPS_data un data frame con las columnas 'Longitude' y 'Latitude'
 #' @param nest_loc un data frame con las coordenadas de la colonia en 'Longitude','Latitude'
 #'
 #' @return regresa un data frame con los maximos de la colonia por viaje
 #' @export
 #'
 #' @examples nest_loc<-data.frame(Longitude = -109.4531, Latitude = -27.20097)
-#' maxdist_km<-calcular_maxdist(GPS_edited=GPS_edited, nest_loc=nest_loc)
-calcular_maxdist<-function(GPS_edited=GPS_edited,
+#' maxdist_km<-calcular_maxdist(GPS_data=GPS_edited, nest_loc=nest_loc)
+calcular_maxdist<-function(GPS_data=GPS_data,
                            nest_loc=nest_loc){
   
   
-  Viajes_df<-as.data.frame(GPS_edited)
+  Viajes_df<-as.data.frame(GPS_data)
   
   #separa los viajes
   Viajes_list<-split(Viajes_df,Viajes_df$trip_number)

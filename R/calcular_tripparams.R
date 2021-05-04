@@ -1,24 +1,24 @@
 #' Calcula los parametros del viaje de alimentacion
 #'
-#' @param GPS_edited es un data frame con tus datos, debe contener columnas 'Longitude','Latitude' y una columna en formato POSTIXct 
-#' @param col_diahora una columna en formato POSTIXct
-#' @param formato el formato en el que esta la col_diahora
+#' @param GPS_data es un data frame con tus datos, debe contener columnas 'Longitude','Latitude', trip_number y dia_horacol que es una columna en formato POSTIXct 
+#' @param diahora_col una columna en formato POSTIXct
+#' @param formato el formato en el que esta la diahora_col
 #' @param nest_loc un data frame con las coordenadas del nido 'Longitude','Latitude'
 #'
 #' @return una tabla con los parametros del viaje
 #' @export
 #'
 #' @examples nest_loc=data.frame(Longitude = -109.4531,Latitude = -27.20097)
-#' trip_params<-calcular_tripparams(GPS_edited = GPS_edited,
-#' col_diahora = "tStamp",
+#' trip_params<-calcular_tripparams(GPS_data = GPS_edited,
+#' diahora_col = "tStamp",
 #' formato = "%Y-%m-%d %H:%M:%S",
 #' nest_loc=nest_loc)
-calcular_tripparams<-function(GPS_edited = GPS_edited,
-                              col_diahora=col_diahora,
+calcular_tripparams<-function(GPS_data = GPS_data,
+                              diahora_col=diahora_col,
                               formato=formato,
                               nest_loc=nest_loc){
   
-  Viajes_list<-split(GPS_edited,GPS_edited$trip_number)
+  Viajes_list<-split(GPS_data,GPS_data$trip_number)
   
   #############
   ### HORAS ###
@@ -30,8 +30,8 @@ calcular_tripparams<-function(GPS_edited = GPS_edited,
     
     Viaje_df<-Viajes_list[[i]]
     
-    trip_start<-dplyr::first(Viaje_df[[col_diahora]])
-    trip_end<-dplyr::last(Viaje_df[[col_diahora]])
+    trip_start<-dplyr::first(Viaje_df[[diahora_col]])
+    trip_end<-dplyr::last(Viaje_df[[diahora_col]])
     trip_id<-dplyr::first(Viaje_df$trip_number)
     
     

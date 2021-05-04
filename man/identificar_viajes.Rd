@@ -4,14 +4,10 @@
 \alias{identificar_viajes}
 \title{Agrega columna identificando viajes}
 \usage{
-identificar_viajes(
-  GPS_track = GPS_track,
-  nest_loc = nest_loc,
-  distancia_km = 1
-)
+identificar_viajes(GPS_data = GPS_data, nest_loc = nest_loc, distancia_km = 1)
 }
 \arguments{
-\item{GPS_track}{es el data frame con datos de GPS con las columnas Latitude y Longitude}
+\item{GPS_data}{es el data frame con datos de GPS con las columnas Latitude y Longitude}
 
 \item{nest_loc}{es un data frame con las columnas Latitude y Longitude}
 
@@ -25,5 +21,5 @@ Agrega columna identificando viajes
 }
 \examples{
 nest_loc<-data.frame(Longitude=-109.4531, Latitude=-27.20097)
-GPS_01_trips<-identificar_viajes(GPS_track=GPS_01,nest_loc=nest_loc,distancia_km=0.01)
+GPS_01_trips<-identificar_viajes(GPS_data=GPS_01,nest_loc=nest_loc,distancia_km=0.01)
 }
