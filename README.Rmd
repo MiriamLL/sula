@@ -22,8 +22,9 @@ knitr::opts_chunk$set(
 library(emo)
 ```
 
-Este paquete contiene datos de tracks de kena (_Sula dactylatra_) colectados en Rapa Nui 🗿  
-
+Este paquete contiene:  
+- **Datos** de tracks de kena (_Sula dactylatra_) colectados en Rapa Nui para replicar los ejemplos 🗿  
+- **Trece funciones** para limpiar y calcular parámetros de viajes a partir de datos GPS
 
 ## Instalación
 
@@ -35,7 +36,7 @@ devtools::install_github("MiriamLL/sula")
 ```
 
 # Datos
-Carga la libreria
+Carga la librería
 ```{r libreria}
 library(sula)
 ```
@@ -55,7 +56,7 @@ head(GPS_raw)
 ```
 
 ## Notas de campo
-Incluye el periodo cuando se coloco el dispositivo hasta cuando se retiro.  No corresponden al periodo real de muestreo.
+Incluye el periodo cuando se coloco el dispositivo hasta cuando se retiró.  No corresponden al periodo real de muestreo.
 ```{r, eval=FALSE}
 Notas<-Notas
 ```
@@ -185,7 +186,37 @@ Para el ejemplo hay que tener dos data frames:
 Uno con los datos de GPS incluyendo las columnas DateGMT,TimeGMT y IDs. Si no tienen estos nombres favor de renombrarlas.  
 El otro data frame son los datos de campo y deben incluir las columnas "IDs", 'Hora_inicio' y "Hora_final". Si no tienen esos nombres favor de renombrarlas.  
 ```{r,eval=FALSE}
-GPS_recortados<-recortar_por_ID(GPS_data=GPS_raw,Notas=Notas,formato="%d/%m/%Y %H:%M:%S")
+GPS_recortados<-recortar_por_ID(GPS_data=GPS_raw,
+                                Notas=Notas,
+                                formato="%d/%m/%Y %H:%M:%S")
+```
+
+### preparar_varios 🔌
+Esta función sirve para preparar los datos antes de calcular parámetros por individuo.
+En la función escribe el nombre de tu data frame, el nombre de la columna de los ID (identificadores por individuo), el nombre de la columna de la longitud y el nombre de la columna de la latitud. Para elegir los viajes elige un buffer de fuera de la colonia (distancia_km). Elige también tu sistema de referencia geográfica.  
+```{r, eval=FALSE}
+GPS_preparado<-preparar_varios(GPS_data=GPS_raw,ID_col="IDs",
+                               lon_col="Longitude",lat_col="Latitude",
+                               distancia_km=1,sistema_ref="+init=epsg:4326")
+```
+Nota que al usar esta función aparecerán warnings. Estos warnings advierten sobre la transformación del objeto espacial.  
+
+### tripparams_varios 📐📐📐
+Para usar esta función tus datos deben tener una columna día y hora, si no es así, usa la función **ajustar_hora** de este paquete y pon 0 en la diferencia horaria.
+```{r, eval=FALSE}
+GPS_preparado<-ajustar_hora(GPS_data = GPS_preparado,
+                            dif_hor = 0,
+                            dia_col = 'DateGMT',
+                            hora_col = 'TimeGMT',
+                            formato="%d/%m/%Y %H:%M:%S")
+```
+
+Para calcula parámetros de viajes de varios individuos especifica el nombre del individuo y el número del viaje.
+```{r, eval=FALSE}
+trip_params<-tripparams_varios(GPS_data=GPS_preparado,
+                               col_ID = "IDs",
+                               col_tripnum="trip_number",
+                               ol_diahora="hora_corregida")
 ```
 
 

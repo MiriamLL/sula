@@ -5,8 +5,11 @@
 
 [![DOI](https://zenodo.org/badge/354821022.svg)](https://zenodo.org/badge/latestdoi/354821022)
 
-Este paquete contiene datos de tracks de kena (*Sula dactylatra*)
-colectados en Rapa Nui 🗿
+Este paquete contiene:  
+- **Datos** de tracks de kena (*Sula dactylatra*) colectados en Rapa Nui
+para replicar los ejemplos 🗿  
+- **Trece funciones** para limpiar y calcular parámetros de viajes a
+partir de datos GPS
 
 ## Instalación
 
@@ -19,7 +22,7 @@ devtools::install_github("MiriamLL/sula")
 
 # Datos
 
-Carga la libreria
+Carga la librería
 
 ``` r
 library(sula)
@@ -47,7 +50,7 @@ head(GPS_raw)
 ## Notas de campo
 
 Incluye el periodo cuando se coloco el dispositivo hasta cuando se
-retiro. No corresponden al periodo real de muestreo.
+retiró. No corresponden al periodo real de muestreo.
 
 ``` r
 Notas<-Notas
@@ -230,7 +233,51 @@ El otro data frame son los datos de campo y deben incluir las columnas
 de renombrarlas.
 
 ``` r
-GPS_recortados<-recortar_por_ID(GPS_data=GPS_raw,Notas=Notas,formato="%d/%m/%Y %H:%M:%S")
+GPS_recortados<-recortar_por_ID(GPS_data=GPS_raw,
+                                Notas=Notas,
+                                formato="%d/%m/%Y %H:%M:%S")
+```
+
+### preparar\_varios 🔌
+
+Esta función sirve para preparar los datos antes de calcular parámetros
+por individuo. En la función escribe el nombre de tu data frame, el
+nombre de la columna de los ID (identificadores por individuo), el
+nombre de la columna de la longitud y el nombre de la columna de la
+latitud. Para elegir los viajes elige un buffer de fuera de la colonia
+(distancia\_km). Elige también tu sistema de referencia geográfica.
+
+``` r
+GPS_preparado<-preparar_varios(GPS_data=GPS_raw,ID_col="IDs",
+                               lon_col="Longitude",lat_col="Latitude",
+                               distancia_km=1,sistema_ref="+init=epsg:4326")
+```
+
+Nota que al usar esta función aparecerán warnings. Estos warnings
+advierten sobre la transformación del objeto espacial.
+
+### tripparams\_varios 📐📐📐
+
+Para usar esta función tus datos deben tener una columna día y hora, si
+no es así, usa la función **ajustar\_hora** de este paquete y pon 0 en
+la diferencia horaria.
+
+``` r
+GPS_preparado<-ajustar_hora(GPS_data = GPS_preparado,
+                            dif_hor = 0,
+                            dia_col = 'DateGMT',
+                            hora_col = 'TimeGMT',
+                            formato="%d/%m/%Y %H:%M:%S")
+```
+
+Para calcula parámetros de viajes de varios individuos especifica el
+nombre del individuo y el número del viaje.
+
+``` r
+trip_params<-tripparams_varios(GPS_data=GPS_preparado,
+                               col_ID = "IDs",
+                               col_tripnum="trip_number",
+                               ol_diahora="hora_corregida")
 ```
 
 # Citar
@@ -238,6 +285,9 @@ GPS_recortados<-recortar_por_ID(GPS_data=GPS_raw,Notas=Notas,formato="%d/%m/%Y %
 -   Lerma M (2021) Package sula. Zenodo.
     <http://doi.org/10.5281/zenodo.4682898>
 
-Los datos de prueba vienen de esa publicación. 
-- Lerma M, Dehnhard N, Luna-Jorquera G, Voigt CC, Garthe S (2020) Breeding stage, not sex, affects foraging characteristics in masked boobies at Rapa Nui. Behavioral ecology and sociobiology 74: 149. [OpenAccess 🔓  ](https://link.springer.com/article/10.1007/s00265-020-02921-1)
+Los datos de prueba vienen de esa publicación. 🔓 - Lerma M, Dehnhard N,
+Luna-Jorquera G, Voigt CC, Garthe S (2020) Breeding stage, not sex,
+affects foraging characteristics in masked boobies at Rapa Nui.
+Behavioral ecology and sociobiology 74: 149.
 
+[![DOI](https://zenodo.org/badge/354821022.svg)](https://zenodo.org/badge/latestdoi/354821022)
