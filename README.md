@@ -147,7 +147,9 @@ el mismo data frame con una nueva columna llamada ‘maxdist\_km’
 GPS_dist<-dist_colonia(GPS_data = GPS_edited, nest_loc=nest_loc)
 ```
 
-**Nota** usa CRS: 4326
+**Nota** usa CRS: 4326. Enlaces: [¿referencia
+geográfica?](https://mgimond.github.io/Spatial/chp09-0.html), [¿cual
+usar?](https://geocompr.robinlovelace.net/reproj-geo-data.html)
 
 #### dist\_puntos 📐
 
@@ -158,7 +160,10 @@ data frame con una nueva columna llamada ‘pointsdist\_km’.
 GPS_dist<-dist_puntos(GPS_data = GPS_edited)
 ```
 
-**Nota** usa CRS: 4326. Incluye NAs al inicio del viaje.
+**Nota** usa CRS: 4326. Incluye NAs al inicio del viaje. Enlaces:
+[¿referencia
+geográfica?](https://mgimond.github.io/Spatial/chp09-0.html), [¿cual
+usar?](https://geocompr.robinlovelace.net/reproj-geo-data.html)
 
 ## Obtener parametros de los viajes
 

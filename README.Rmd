@@ -121,14 +121,14 @@ Agrega una columna con la distancia de la colonia de cada punto.  Regresa el mis
 ```{r, echo=TRUE, eval=FALSE, warnings=FALSE}
 GPS_dist<-dist_colonia(GPS_data = GPS_edited, nest_loc=nest_loc)
 ```
-**Nota** usa CRS: 4326
+**Nota** usa CRS: 4326. Enlaces: [¿referencia geográfica?](https://mgimond.github.io/Spatial/chp09-0.html), [¿cual usar?](https://geocompr.robinlovelace.net/reproj-geo-data.html)
 
 #### dist_puntos 📐
 Agrega una columna con la distancia entre cada punto.  Regresa el mismo data frame con una nueva columna llamada 'pointsdist_km'.  
 ```{r, echo=TRUE, eval=FALSE, warnings=FALSE}
 GPS_dist<-dist_puntos(GPS_data = GPS_edited)
 ```
-**Nota** usa CRS: 4326. Incluye NAs al inicio del viaje.
+**Nota** usa CRS: 4326. Incluye NAs al inicio del viaje. Enlaces: [¿referencia geográfica?](https://mgimond.github.io/Spatial/chp09-0.html), [¿cual usar?](https://geocompr.robinlovelace.net/reproj-geo-data.html)
 
 ## Obtener parametros de los viajes
 
