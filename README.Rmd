@@ -180,7 +180,7 @@ Nidos_df<-localizar_nidos(GPS_data=GPS_raw,
 ```
 
 
-### recortar_por_ID ✂️✂️✂️
+#### recortar_por_ID  ✂️✂️✂️
 Puedes recortar periodos en los viajes.  
 Para el ejemplo hay que tener dos data frames:  
 Uno con los datos de GPS incluyendo las columnas DateGMT,TimeGMT y IDs. Si no tienen estos nombres favor de renombrarlas.  
@@ -191,7 +191,7 @@ GPS_recortados<-recortar_por_ID(GPS_data=GPS_raw,
                                 formato="%d/%m/%Y %H:%M:%S")
 ```
 
-### preparar_varios 🔌
+#### preparar_varios 🔌
 Esta función sirve para preparar los datos antes de calcular parámetros por individuo.
 En la función escribe el nombre de tu data frame, el nombre de la columna de los ID (identificadores por individuo), el nombre de la columna de la longitud y el nombre de la columna de la latitud. Para elegir los viajes elige un buffer de fuera de la colonia (distancia_km). Elige también tu sistema de referencia geográfica.  
 ```{r, eval=FALSE}
@@ -201,8 +201,16 @@ GPS_preparado<-preparar_varios(GPS_data=GPS_raw,ID_col="IDs",
 ```
 Nota que al usar esta función aparecerán warnings. Estos warnings advierten sobre la transformación del objeto espacial.  
 
-### tripparams_varios 📐📐📐
-Para usar esta función tus datos deben tener una columna día y hora, si no es así, usa la función **ajustar_hora** de este paquete y pon 0 en la diferencia horaria.
+#### tripparams_varios 📐📐📐
+Para calcula parámetros de viajes de varios individuos especifica el nombre de la columna que contiene los identificadores por individuo, el nombre de la columna que contiene información número del viaje y el nombre de la columna que contiene información del día y hora en formato POSTIXct.
+```{r, eval=FALSE}
+trip_params<-tripparams_varios(GPS_data=GPS_preparado,
+                               col_ID = "IDs",
+                               col_tripnum="trip_number",
+                               ol_diahora="hora_corregida")
+```
+
+Nota: para usar esta función tus datos deben tener una columna día y hora, si no es así, puedes hacerlo de manera manual o usar la función **ajustar_hora** de este paquete y poner 0 en la diferencia horaria.
 ```{r, eval=FALSE}
 GPS_preparado<-ajustar_hora(GPS_data = GPS_preparado,
                             dif_hor = 0,
@@ -211,20 +219,11 @@ GPS_preparado<-ajustar_hora(GPS_data = GPS_preparado,
                             formato="%d/%m/%Y %H:%M:%S")
 ```
 
-Para calcula parámetros de viajes de varios individuos especifica el nombre del individuo y el número del viaje.
-```{r, eval=FALSE}
-trip_params<-tripparams_varios(GPS_data=GPS_preparado,
-                               col_ID = "IDs",
-                               col_tripnum="trip_number",
-                               ol_diahora="hora_corregida")
-```
-
-
 # Citar
 
-- Lerma M (2021) Package sula. Zenodo. http://doi.org/10.5281/zenodo.4682898 
-
 Los datos de prueba vienen de esa publicación. 🔓
-- Lerma M, Dehnhard N, Luna-Jorquera G, Voigt CC, Garthe S (2020) Breeding stage, not sex, affects foraging characteristics in masked boobies at Rapa Nui. Behavioral ecology and sociobiology 74: 149.  
+- Lerma M, Dehnhard N, Luna-Jorquera G, Voigt CC, Garthe S (2020) Breeding stage, not sex, affects foraging characteristics in masked boobies at Rapa Nui. Behavioral ecology and sociobiology 74: 149. 
+
+- Lerma M (2021) Package sula. Zenodo. http://doi.org/10.5281/zenodo.4682898 
 
 [![DOI](https://zenodo.org/badge/354821022.svg)](https://zenodo.org/badge/latestdoi/354821022)

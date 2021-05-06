@@ -222,7 +222,7 @@ Nidos_df<-localizar_nidos(GPS_data=GPS_raw,
                          ID_col="IDs")
 ```
 
-### recortar\_por\_ID ✂️✂️✂️
+#### recortar\_por\_ID ✂️✂️✂️
 
 Puedes recortar periodos en los viajes.  
 Para el ejemplo hay que tener dos data frames:  
@@ -238,7 +238,7 @@ GPS_recortados<-recortar_por_ID(GPS_data=GPS_raw,
                                 formato="%d/%m/%Y %H:%M:%S")
 ```
 
-### preparar\_varios 🔌
+#### preparar\_varios 🔌
 
 Esta función sirve para preparar los datos antes de calcular parámetros
 por individuo. En la función escribe el nombre de tu data frame, el
@@ -256,11 +256,24 @@ GPS_preparado<-preparar_varios(GPS_data=GPS_raw,ID_col="IDs",
 Nota que al usar esta función aparecerán warnings. Estos warnings
 advierten sobre la transformación del objeto espacial.
 
-### tripparams\_varios 📐📐📐
+#### tripparams\_varios 📐📐📐
 
-Para usar esta función tus datos deben tener una columna día y hora, si
-no es así, usa la función **ajustar\_hora** de este paquete y pon 0 en
-la diferencia horaria.
+Para calcula parámetros de viajes de varios individuos especifica el
+nombre de la columna que contiene los identificadores por individuo, el
+nombre de la columna que contiene información número del viaje y el
+nombre de la columna que contiene información del día y hora en formato
+POSTIXct.
+
+``` r
+trip_params<-tripparams_varios(GPS_data=GPS_preparado,
+                               col_ID = "IDs",
+                               col_tripnum="trip_number",
+                               ol_diahora="hora_corregida")
+```
+
+Nota: para usar esta función tus datos deben tener una columna día y
+hora, si no es así, puedes hacerlo de manera manual o usar la función
+**ajustar\_hora** de este paquete y poner 0 en la diferencia horaria.
 
 ``` r
 GPS_preparado<-ajustar_hora(GPS_data = GPS_preparado,
@@ -270,24 +283,14 @@ GPS_preparado<-ajustar_hora(GPS_data = GPS_preparado,
                             formato="%d/%m/%Y %H:%M:%S")
 ```
 
-Para calcula parámetros de viajes de varios individuos especifica el
-nombre del individuo y el número del viaje.
-
-``` r
-trip_params<-tripparams_varios(GPS_data=GPS_preparado,
-                               col_ID = "IDs",
-                               col_tripnum="trip_number",
-                               ol_diahora="hora_corregida")
-```
-
 # Citar
-
--   Lerma M (2021) Package sula. Zenodo.
-    <http://doi.org/10.5281/zenodo.4682898>
 
 Los datos de prueba vienen de esa publicación. 🔓 - Lerma M, Dehnhard N,
 Luna-Jorquera G, Voigt CC, Garthe S (2020) Breeding stage, not sex,
 affects foraging characteristics in masked boobies at Rapa Nui.
 Behavioral ecology and sociobiology 74: 149.
+
+-   Lerma M (2021) Package sula. Zenodo.
+    <http://doi.org/10.5281/zenodo.4682898>
 
 [![DOI](https://zenodo.org/badge/354821022.svg)](https://zenodo.org/badge/latestdoi/354821022)
