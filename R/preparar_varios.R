@@ -216,10 +216,12 @@ preparar_varios<-function(GPS_data=GPS_data,
   
   var3<-c(ID_col,"trip_number","num_seq")
   
-  GPS_onceavo_df<-GPS_onceavo_df %>% 
+  GPS_doceavo_df<-GPS_onceavo_df %>% 
     dplyr::relocate(var3)
   
-  GPS_onceavo_df$trip<-NULL
+  GPS_doceavo_df$trip<-NULL
+  GPS_doceavo_df$`data$IDs`<-NULL
+  GPS_doceavo_df$`data$trip_number`<-NULL
   
-  return(GPS_onceavo_df)
+  return(GPS_doceavo_df)
 }
