@@ -3,7 +3,7 @@
 
 # sula <img src="man/figures/logo.png" align="right" width = "120px"/>
 
-[![DOI](https://zenodo.org/badge/360213200.svg)](https://zenodo.org/badge/latestdoi/360213200)
+[![DOI](https://zenodo.org/badge/354821022.svg)](https://zenodo.org/badge/latestdoi/354821022)
 
 Este paquete contiene:  
 - **Datos** de tracks de kena (*Sula dactylatra*) colectados en Rapa Nui
@@ -305,6 +305,7 @@ affects foraging characteristics in masked boobies at Rapa Nui.
 Behavioral ecology and sociobiology 74: 149.
 
 -   Lerma M (2021) Package sula. Zenodo. DOI: 10.5281/zenodo.4740920 
-    <http://doi.org/10.5281/zenodo.4740920>
-
+    <https://doi.org/10.5281/zenodo.4740920>
+    
+[![DOI](https://zenodo.org/badge/354821022.svg)](https://zenodo.org/badge/latestdoi/354821022)
 
