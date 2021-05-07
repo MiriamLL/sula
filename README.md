@@ -132,7 +132,7 @@ y
 #### contar\_viajes 🧮
 
 Esta función agrega una columna con el número del viaje y elimina
-locaciones dentro de el radio de la colonia.
+locaciones dentro del radio de la colonia.
 
 ``` r
 GPS_edited<-contar_viajes(GPS_data=GPS_trip)
