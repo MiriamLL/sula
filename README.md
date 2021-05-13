@@ -215,6 +215,7 @@ trip_params<-calcular_tripparams(GPS_data = GPS_edited,
                               formato = "%Y-%m-%d %H:%M:%S",
                               nest_loc=nest_loc)
 ```
+Depende de lo que consideres como distancia recorrida puede que tengas que agregar los kilometros del buffer a tu distancia total recorrida.
 
 ## Multiples individuos
 
@@ -224,10 +225,10 @@ Puedes recortar periodos en los viajes.
 Para el ejemplo hay que tener dos data frames:  
 Uno con los **datos de GPS** incluyendo las columnas DateGMT,TimeGMT y
 IDs.  
-Si no tienen estos nombres favor de renombrarlas.  
+Si tus columnas no tienen esos nombres favor de renombrarlas. Una función útil para renombrar columnas es rename de tidyverse. 
 El otro data frame son los **datos de campo** y deben incluir las
 columnas “IDs”, ‘Hora\_inicio’ y “Hora\_final”.  
-Si no tienen esos nombres favor de renombrarlas.
+Si tus columnas no tienen esos nombres favor de renombrarlas. Una función útil para renombrar columnas es rename de tidyverse. 
 
 ``` r
 GPS_recortados<-recortar_por_ID(GPS_data=GPS_raw,
@@ -288,6 +289,7 @@ trip_params<-tripparams_varios(GPS_data=GPS_preparado,
 Nota: para usar esta función tus datos deben tener una columna día y
 hora, si no es así, puedes hacerlo de manera manual o usar la función
 **ajustar\_hora** de este paquete y poner 0 en la diferencia horaria.
+Depende de lo que consideres como distancia recorrida puede que tengas que agregar los kilometros del buffer a tu distancia total recorrida.
 
 ``` r
 GPS_preparado<-ajustar_hora(GPS_data = GPS_preparado,
