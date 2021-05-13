@@ -225,10 +225,10 @@ Puedes recortar periodos en los viajes.
 Para el ejemplo hay que tener dos data frames:  
 Uno con los **datos de GPS** incluyendo las columnas DateGMT,TimeGMT y
 IDs.  
-Si tus columnas no tienen esos nombres favor de renombrarlas. Una función útil para renombrar columnas es rename de tidyverse. 
+Si tus columnas no tienen esos nombres favor de renombrarlas. Una función útil para renombrar columnas es rename de tidyverse.  
 El otro data frame son los **datos de campo** y deben incluir las
-columnas “IDs”, ‘Hora\_inicio’ y “Hora\_final”.  
-Si tus columnas no tienen esos nombres favor de renombrarlas. Una función útil para renombrar columnas es rename de tidyverse. 
+columnas IDs, Hora\_inicio y Hora\_final.  
+Si tus columnas no tienen esos nombres favor de renombrarlas. Una función útil para renombrar columnas es rename de tidyverse.  
 
 ``` r
 GPS_recortados<-recortar_por_ID(GPS_data=GPS_raw,
