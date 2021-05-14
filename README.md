@@ -273,7 +273,7 @@ usar?](https://geocompr.robinlovelace.net/reproj-geo-data.html)
 
 #### tripparams\_varios 📐📐📐
 
-Para calcula parámetros de viajes de varios individuos especifica el
+Para calcular parámetros de viajes de varios individuos especifica el
 nombre de la columna que contiene los identificadores por individuo, el
 nombre de la columna que contiene información número del viaje y el
 nombre de la columna que contiene información del día y hora en formato
