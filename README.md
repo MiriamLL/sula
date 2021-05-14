@@ -27,7 +27,7 @@ library(sula)
 
 # Funciones
 
-## ajustar\_hora 🕐
+### ajustar\_hora 🕐
 
 This function allows you to correct the time of the GPS according to
 your GMT. You need to provide your data frame, the name of you columns
@@ -42,8 +42,6 @@ GPS_gmt<-ajustar_hora(GPS_data = GPS_raw,
                       formato="%d/%m/%Y %H:%M:%S",
                       dif_hor = 5)
 ```
-
-## Un individuo
 
 ### recortar\_periodo
 

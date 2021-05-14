@@ -40,7 +40,8 @@ library(sula)
 ```
 
 # Funciones
-## ajustar_hora 🕐
+
+### ajustar_hora 🕐
 
 This function allows you to correct the time of the GPS according to your GMT. 
 You need to provide your data frame, the name of you columns containing time and date, the format of those columns and the time difference between the data and your GMT. It returns hora_corregida with the corrected time.
@@ -53,7 +54,6 @@ GPS_gmt<-ajustar_hora(GPS_data = GPS_raw,
                       dif_hor = 5)
 ```
 
-## Un individuo
 ### recortar_periodo 
 
 This function allows you to cut specific periods in your data. Inicio means start, Final means end.
