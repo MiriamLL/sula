@@ -12,17 +12,20 @@ localizar_nidos(
 )
 }
 \arguments{
-\item{GPS_data}{Un data frame con las columnas Latitude, Longitude y IDs}
+\item{GPS_data}{Un data frame con las columnas Latitude, Longitude y IDs.}
 
-\item{lon_col}{El nombre de la columna donde esta la Longitude}
+\item{lon_col}{El nombre de la columna donde esta la Longitude. Debe escribirse entre comillas.}
 
-\item{lat_col}{El nombre de la columna donde esta la Latitude}
+\item{lat_col}{El nombre de la columna donde esta la Latitude. Debe escribirse entre comillas.}
 
-\item{ID_col}{El nombre de la columna donde estan los IDs}
+\item{ID_col}{El nombre de la columna donde estan los IDs. Debe escribirse entre comillas.}
 }
 \value{
 Un data frame con la localizacion de los nidos
 }
 \description{
 Obtiene informacion del nido, usando el primer punto de registro
+}
+\examples{
+Nidos_df<-localizar_nidos(GPS_data=GPS_raw,lon_col="Longitude",lat_col="Latitude",ID_col="IDs")
 }

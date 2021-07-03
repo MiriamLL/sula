@@ -2,32 +2,35 @@
 % Please edit documentation in R/calcular_duracion.R
 \name{calcular_duracion}
 \alias{calcular_duracion}
-\title{Calcula la duracion de los viajes de alimentacion}
+\title{Calcula la duración de los viajes de alimentación}
 \usage{
 calcular_duracion(
   GPS_data = GPS_data,
   col_diahora = col_diahora,
   formato = formato,
-  unidades = unidades
+  unidades = unidades,
+  separador = separador
 )
 }
 \arguments{
-\item{GPS_data}{un data frame con una columna que incluya dia y hora, y otra columna que incluya el numero del viaje}
+\item{GPS_data}{un data frame con una columna que incluya día y hora, y otra columna que incluya el numero del viaje}
 
-\item{col_diahora}{la columna en formato POSTIXct con informacion del dia y hora}
+\item{col_diahora}{la columna en formato POSTIXct con información del día y hora}
 
-\item{formato}{el formato en el que esta la hora y dia en la columna POSTIXct con informacion del dia y hora}
+\item{formato}{el formato en el que esta la hora y día en la columna POSTIXct con información del día y hora}
 
 \item{unidades}{elegir "hours", "minutes", "seconds".}
+
+\item{separador}{la columna a usar para separar los viajes, puede ser el numero del viaje o separar por individuos, por ejemplo 'trip_number'}
 }
 \value{
-regresa un nuevo data frame con la informacion del viaje, cuando inicio, cuando termino y la duracion
+regresa un nuevo data frame con la información del viaje, cuando inicio, cuando termino y la duración
 }
 \description{
-Calcula la duracion de los viajes de alimentacion
+Calcula la duración de los viajes de alimentación
 }
 \examples{
 formato<-"\%Y-\%m-\%d \%H:\%M:\%S"
 duracion<-calcular_duracion(GPS_data=GPS_edited,col_diahora="tStamp",
-formato=formato,unidades="hours")
+formato=formato,unidades="hours",separador='trip_number')
 }

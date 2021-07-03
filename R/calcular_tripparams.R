@@ -1,9 +1,10 @@
 #' Calcula los parametros del viaje de alimentacion
 #'
 #' @param GPS_data es un data frame con tus datos, debe contener columnas 'Longitude','Latitude', trip_number y dia_horacol que es una columna en formato POSTIXct 
-#' @param diahora_col una columna en formato POSTIXct
-#' @param formato el formato en el que esta la diahora_col
+#' @param diahora_col El nombre de la columna en formato POSTIXct. El nombre de la columna debe ir entre comillas.
+#' @param formato el formato en el que esta la diahora_col. El nombre de la columna debe ir entre comillas.
 #' @param nest_loc un data frame con las coordenadas del nido 'Longitude','Latitude'
+#' @param separador El nombre de la columna a usar para separar los viajes, puede ser el numero del viaje o separar por individuos. . El nombre de la columna debe ir entre comillas.
 #'
 #' @return una tabla con los parametros del viaje
 #' @export
@@ -12,13 +13,27 @@
 #' trip_params<-calcular_tripparams(GPS_data = GPS_edited,
 #' diahora_col = "tStamp",
 #' formato = "%Y-%m-%d %H:%M:%S",
-#' nest_loc=nest_loc)
+#' nest_loc=nest_loc,
+#' separador='trip_number')
 calcular_tripparams<-function(GPS_data = GPS_data,
                               diahora_col=diahora_col,
                               formato=formato,
-                              nest_loc=nest_loc){
+                              nest_loc=nest_loc,
+                              separador=separador){
   
-  Viajes_list<-split(GPS_data,GPS_data$trip_number)
+  if (nrow(GPS_data)!=0){
+  } else {
+    warning("Please check the name on the GPS_data data frame")
+  }
+  
+  if (!is.null(GPS_data[[separador]])) {
+  } else {
+    warning("Please check the name on the separador column")
+  }
+  
+
+  GPS_data$separador<-(GPS_data[[separador]])
+  Viajes_list<-split(GPS_data,GPS_data$separador)
   
   #############
   ### HORAS ###
@@ -32,7 +47,7 @@ calcular_tripparams<-function(GPS_data = GPS_data,
     
     trip_start<-dplyr::first(Viaje_df[[diahora_col]])
     trip_end<-dplyr::last(Viaje_df[[diahora_col]])
-    trip_id<-dplyr::first(Viaje_df$trip_number)
+    trip_id<-dplyr::first(Viaje_df[[separador]])
     
     
     Horas_list[[i]]<-data.frame(trip_id = trip_id,
@@ -51,6 +66,16 @@ calcular_tripparams<-function(GPS_data = GPS_data,
   #############
   ##TOTAL
   #############
+  
+  if ("Latitude" %in% colnames(GPS_data)){
+  } else {
+    warning("Please check that nest_loc has a column named Latitude, otherwise please rename the column as Latitude")
+  }
+  
+  if ("Longitude" %in% colnames(GPS_data)){
+  } else {
+    warning("Please check that nest_loc has a column named Longitude, otherwise please rename the column as Longitude")
+  }
   
   for( i in seq_along(Viajes_list)){
     
@@ -85,7 +110,7 @@ calcular_tripparams<-function(GPS_data = GPS_data,
     Totaldist_df <- data %>%
       dplyr::summarise(totaldist_km=sum(data[[var1]],na.rm=TRUE))
     
-    trip_id<-dplyr::first(data$trip_number)
+    trip_id<-dplyr::first(data[[separador]])
     
     Totaldist_list[[i]]<- data.frame(trip_id = trip_id,
                                      totaldist_km = Totaldist_df)
@@ -98,6 +123,16 @@ calcular_tripparams<-function(GPS_data = GPS_data,
   #################
   ####MAX##########
   #################
+  
+  if ("Latitude" %in% colnames(nest_loc)){
+  } else {
+    warning("Please check that nest_loc has a column named Latitude, otherwise please rename the column as Latitude")
+  }
+  
+  if ("Longitude" %in% colnames(nest_loc)){
+  } else {
+    warning("Please check that nest_loc has a column named Longitude, otherwise please rename the column as Longitude")
+  }
   
   Nest_df<-nest_loc
   Nest_coords<- Nest_df[,c('Longitude','Latitude')]
@@ -133,7 +168,7 @@ calcular_tripparams<-function(GPS_data = GPS_data,
     Maxdist_df <- data %>%
       dplyr::summarise(maxdist_km=max(data[[var1]],na.rm=TRUE))
     
-    trip_id<-dplyr::first(data$trip_number)
+    trip_id<-dplyr::first(data[[separador]])
     
     Maxdist_list[[i]]<- data.frame(trip_id = trip_id,
                                    maxdist_km = Maxdist_df)

@@ -4,10 +4,12 @@
 \alias{dist_puntos}
 \title{Agrega una columna con la distancia entre cada punto.}
 \usage{
-dist_puntos(GPS_data = GPS_data)
+dist_puntos(GPS_data = GPS_data, separador = separador)
 }
 \arguments{
-\item{GPS_data}{es un data frame con datos de Longitude y Latitude}
+\item{GPS_data}{es un data frame con datos de Longitude y Latitude.}
+
+\item{separador}{El nombre de la columna a usar para separar los viajes, puede ser el numero del viaje o separar por individuos. . El nombre de la columna debe ir entre comillas.}
 }
 \value{
 el mismo data frame con una columna llamada pointsdist_km
@@ -16,5 +18,5 @@ el mismo data frame con una columna llamada pointsdist_km
 Agrega una columna con la distancia entre cada punto.
 }
 \examples{
-GPS_dist<-dist_puntos(GPS_data = GPS_edited)
+GPS_dist<-dist_puntos(GPS_data = GPS_edited,separador='trip_number')
 }

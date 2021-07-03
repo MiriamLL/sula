@@ -11,6 +11,25 @@
 dist_colonia<-function(GPS_edited=GPS_edited,
                        nest_loc=nest_loc){
   
+  if ("Latitude" %in% colnames(GPS_edited)){
+  } else {
+    warning("Please check that nest_loc has a column named Latitude, otherwise please rename the column as Latitude")
+  }
+  
+  if ("Longitude" %in% colnames(GPS_edited)){
+  } else {
+    warning("Please check that nest_loc has a column named Longitude, otherwise please rename the column as Longitude")
+  }
+  
+  if ("Latitude" %in% colnames(nest_loc)){
+  } else {
+    warning("Please check that nest_loc has a column named Latitude, otherwise please rename the column as Latitude")
+  }
+  
+  if ("Longitude" %in% colnames(nest_loc)){
+  } else {
+    warning("Please check that nest_loc has a column named Longitude, otherwise please rename the column as Longitude")
+  }
   # tracks
   track_df<-as.data.frame(GPS_edited)
   track_spatial<-track_df

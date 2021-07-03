@@ -1,14 +1,14 @@
 #' Obtiene informacion del nido, usando el primer punto de registro
 #'
-#' @param GPS_data Un data frame con las columnas Latitude, Longitude y IDs
-#' @param lon_col El nombre de la columna donde esta la Longitude
-#' @param lat_col El nombre de la columna donde esta la Latitude
-#' @param ID_col El nombre de la columna donde estan los IDs
+#' @param GPS_data Un data frame con las columnas Latitude, Longitude y IDs.
+#' @param lon_col El nombre de la columna donde esta la Longitude. Debe escribirse entre comillas.
+#' @param lat_col El nombre de la columna donde esta la Latitude. Debe escribirse entre comillas.
+#' @param ID_col El nombre de la columna donde estan los IDs. Debe escribirse entre comillas.
 #'
 #' @return Un data frame con la localizacion de los nidos
 #' @export
 #'
-#' @examples Nidos_df<-localizar_nidos(GPS_data=GPS_raw,lon_col="Longitude",lat_col="lat_col"Latitude",ID_col="IDs")
+#' @examples Nidos_df<-localizar_nidos(GPS_data=GPS_raw,lon_col="Longitude",lat_col="Latitude",ID_col="IDs")
 localizar_nidos<-function(GPS_data=GPS_data,
                           lon_col=lon_col,
                           lat_col=lat_col,

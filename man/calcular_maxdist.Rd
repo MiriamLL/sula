@@ -4,12 +4,18 @@
 \alias{calcular_maxdist}
 \title{Calcular la distancia maxima de la colonia por viaje}
 \usage{
-calcular_maxdist(GPS_data = GPS_data, nest_loc = nest_loc)
+calcular_maxdist(
+  GPS_data = GPS_data,
+  nest_loc = nest_loc,
+  separador = separador
+)
 }
 \arguments{
 \item{GPS_data}{un data frame con las columnas 'Longitude' y 'Latitude'}
 
 \item{nest_loc}{un data frame con las coordenadas de la colonia en 'Longitude','Latitude'}
+
+\item{separador}{la columna a usar para separar los viajes, puede ser el numero del viaje o separar por individuos, por ejemplo 'trip_number'}
 }
 \value{
 regresa un data frame con los maximos de la colonia por viaje
@@ -19,5 +25,5 @@ Calcular la distancia maxima de la colonia por viaje
 }
 \examples{
 nest_loc<-data.frame(Longitude = -109.4531, Latitude = -27.20097)
-maxdist_km<-calcular_maxdist(GPS_data=GPS_edited, nest_loc=nest_loc)
+maxdist_km<-calcular_maxdist(GPS_data=GPS_edited, nest_loc=nest_loc,separador='trip_number')
 }

@@ -8,17 +8,20 @@ calcular_tripparams(
   GPS_data = GPS_data,
   diahora_col = diahora_col,
   formato = formato,
-  nest_loc = nest_loc
+  nest_loc = nest_loc,
+  separador = separador
 )
 }
 \arguments{
 \item{GPS_data}{es un data frame con tus datos, debe contener columnas 'Longitude','Latitude', trip_number y dia_horacol que es una columna en formato POSTIXct}
 
-\item{diahora_col}{una columna en formato POSTIXct}
+\item{diahora_col}{El nombre de la columna en formato POSTIXct. El nombre de la columna debe ir entre comillas.}
 
-\item{formato}{el formato en el que esta la diahora_col}
+\item{formato}{el formato en el que esta la diahora_col. El nombre de la columna debe ir entre comillas.}
 
 \item{nest_loc}{un data frame con las coordenadas del nido 'Longitude','Latitude'}
+
+\item{separador}{El nombre de la columna a usar para separar los viajes, puede ser el numero del viaje o separar por individuos. . El nombre de la columna debe ir entre comillas.}
 }
 \value{
 una tabla con los parametros del viaje
@@ -31,5 +34,6 @@ nest_loc=data.frame(Longitude = -109.4531,Latitude = -27.20097)
 trip_params<-calcular_tripparams(GPS_data = GPS_edited,
 diahora_col = "tStamp",
 formato = "\%Y-\%m-\%d \%H:\%M:\%S",
-nest_loc=nest_loc)
+nest_loc=nest_loc,
+separador='trip_number')
 }

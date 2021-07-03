@@ -8,7 +8,8 @@ tripparams_varios(
   GPS_data = GPS_data,
   col_ID = col_ID,
   col_tripnum = col_tripnum,
-  col_diahora = col_diahora
+  col_diahora = col_diahora,
+  separador = separador
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ tripparams_varios(
 \item{col_tripnum}{el nombre de la columna del data frame que incluye el identificador del viaje}
 
 \item{col_diahora}{el nombre de la columna del data frame que incluye el dia y hora en formato POSTIXct}
+
+\item{separador}{El nombre de la columna a usar para separar los viajes, puede ser el numero del viaje o separar por individuos. Escribir entre  comillas.}
 }
 \value{
 un data frame con parametros de los viajes
@@ -30,5 +33,6 @@ Calcula parametros de viajes de varios individuos
 trip_params<-tripparams_varios(GPS_data=GPS_preparado,
 col_ID = "IDs",
 col_tripnum="trip_number",
-col_diahora="hora_corregida")
+col_diahora="hora_corregida",
+separador='trip_number')
 }

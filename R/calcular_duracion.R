@@ -1,23 +1,35 @@
-#' Calcula la duracion de los viajes de alimentacion
+#' Calcula la duración de los viajes de alimentación
 #'
-#' @param GPS_data un data frame con una columna que incluya dia y hora, y otra columna que incluya el numero del viaje
-#' @param col_diahora la columna en formato POSTIXct con informacion del dia y hora
-#' @param formato el formato en el que esta la hora y dia en la columna POSTIXct con informacion del dia y hora
+#' @param GPS_data un data frame con una columna que incluya día y hora, y otra columna que incluya el numero del viaje
+#' @param col_diahora la columna en formato POSTIXct con información del día y hora
+#' @param formato el formato en el que esta la hora y día en la columna POSTIXct con información del día y hora
 #' @param unidades elegir "hours", "minutes", "seconds".
+#' @param separador la columna a usar para separar los viajes, puede ser el numero del viaje o separar por individuos, por ejemplo 'trip_number'
 #'
-#' @return regresa un nuevo data frame con la informacion del viaje, cuando inicio, cuando termino y la duracion
+#' @return regresa un nuevo data frame con la información del viaje, cuando inicio, cuando termino y la duración
 #' @export
 #'
 #' @examples formato<-"%Y-%m-%d %H:%M:%S"
 #' duracion<-calcular_duracion(GPS_data=GPS_edited,col_diahora="tStamp",
-#' formato=formato,unidades="hours")
+#' formato=formato,unidades="hours",separador='trip_number')
 calcular_duracion<-function(GPS_data = GPS_data,
                             col_diahora=col_diahora,
                             formato=formato,
-                            unidades=unidades){
+                            unidades=unidades,
+                            separador=separador){
+
+  if (!is.null(GPS_data[[separador]])) {
+  } else {
+    warning("Please check the name on the separador column")
+  }
+  if (!is.null(GPS_data[[col_diahora]])) {
+  } else {
+    warning("Please check the name in col_diahora")
+  }
   
+  GPS_data$separador<-(GPS_data[[separador]])
   
-  Viajes_list<-split(GPS_data,GPS_data$trip_number)
+  Viajes_list<-split(GPS_data,GPS_data$separador)
   
   Horas_list<-list()
   
@@ -28,7 +40,7 @@ calcular_duracion<-function(GPS_data = GPS_data,
     
     trip_start<-dplyr::first(Viaje_df[[col_diahora]])
     trip_end<-dplyr::last(Viaje_df[[col_diahora]])
-    trip_id<-dplyr::first(Viaje_df$trip_number)
+    trip_id<-dplyr::first(Viaje_df[[separador]])
     
     
     Horas_list[[i]]<-nest_loc<-data.frame(trip_id = trip_id,

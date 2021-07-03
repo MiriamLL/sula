@@ -2,22 +2,63 @@
 #'
 #' @param GPS_data un data frame con las columnas 'Longitude' y 'Latitude'
 #' @param nest_loc un data frame con las coordenadas de la colonia en 'Longitude','Latitude'
+#' @param separador la columna a usar para separar los viajes, puede ser el numero del viaje o separar por individuos, por ejemplo 'trip_number'
 #'
 #' @return regresa un data frame con los maximos de la colonia por viaje
 #' @export
 #'
 #' @examples nest_loc<-data.frame(Longitude = -109.4531, Latitude = -27.20097)
-#' maxdist_km<-calcular_maxdist(GPS_data=GPS_edited, nest_loc=nest_loc)
+#' maxdist_km<-calcular_maxdist(GPS_data=GPS_edited, nest_loc=nest_loc,separador='trip_number')
 calcular_maxdist<-function(GPS_data=GPS_data,
-                           nest_loc=nest_loc){
+                           nest_loc=nest_loc,
+                           separador=separador){
+  
+  
+  if (!is.null(GPS_data[[separador]])) {
+  } else {
+    warning("Please check the name on the separador column")
+  }
+  
+  if (nrow(GPS_data)!=0){
+  } else {
+    warning("Please check the name on the GPS_data data frame")
+  }
+  
+  if (nrow(nest_loc)!=0){
+  } else {
+    warning("Please check the name on the nest_loc data frame")
+  }
   
   
   Viajes_df<-as.data.frame(GPS_data)
   
   #separa los viajes
-  Viajes_list<-split(Viajes_df,Viajes_df$trip_number)
+  Viajes_df$separador<-(Viajes_df[[separador]])
+  
+  Viajes_list<-split(Viajes_df,Viajes_df$separador)
   
   Nest_df<-nest_loc
+  
+  if ("Latitude" %in% colnames(nest_loc)){
+  } else {
+    warning("Please check that nest_loc has a column named Latitude, otherwise please rename the column as Latitude")
+  }
+  
+  if ("Longitude" %in% colnames(nest_loc)){
+  } else {
+    warning("Please check that nest_loc has a column named Longitude, otherwise please rename the column as Longitude")
+  }
+  
+  if ("Latitude" %in% colnames(GPS_data)){
+  } else {
+    warning("Please check that nest_loc has a column named Latitude, otherwise please rename the column as Latitude")
+  }
+  
+  if ("Longitude" %in% colnames(GPS_data)){
+  } else {
+    warning("Please check that nest_loc has a column named Longitude, otherwise please rename the column as Longitude")
+  }
+  
   Nest_coords<- Nest_df[,c('Longitude','Latitude')]
   Nest_spatial <- sp::SpatialPointsDataFrame(coords = Nest_coords, data = Nest_df)
   sp::proj4string(Nest_spatial)= sp::CRS("+init=epsg:4326") 
@@ -51,7 +92,7 @@ calcular_maxdist<-function(GPS_data=GPS_data,
     Maxdist_df <- data %>%
       dplyr::summarise(maxdist_km=max(data[[var1]],na.rm=TRUE))
     
-    trip_id<-dplyr::first(data$trip_number)
+    trip_id<-dplyr::first(data$separador)
     
     Maxdist_list[[i]]<- data.frame(trip_id = trip_id,
                                    maxdist_km = Maxdist_df)
