@@ -27,6 +27,9 @@ preparar_varios<-function(GPS_data=GPS_data,
   
   ID_col<-ID_col
   
+  cat("\n ES: Apareceran algunos warnings.
+      \n EN: Warnings will appear.")
+  
   # separa los individuos
   GPS_primero_ls<-split(GPS_df,GPS_df[[ID_col]])
   
