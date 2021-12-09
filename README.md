@@ -14,6 +14,11 @@ parameters of the individuals.
 **[Enlace en
 español](https://www.miriam-lerma.com/posts/2021-05-14-sula/).**
 
+The idea is that you use the data as an example and you can adapt your
+data to calculate the foraging trip parameters. Also you can have most
+of the information accompany your original track information for
+check-ups in a GIS software.
+
 ## Installation
 
 ``` r
@@ -57,7 +62,7 @@ GPS_recortado<-recortar_periodo(GPS_data=GPS_01,
                                 formato="%d/%m/%Y %H:%M:%S")
 #> 
 #>  ES: El track original contenia 1038 filas y el track editado contiene 986 filas 
-#>  EN: The original track had1038 the edited track has 986
+#>  EN: The original track had 1038 rows, and the edited track has 986
 ```
 
 #### localizar\_nido 🐣

@@ -28,6 +28,9 @@ This packages contains: <br>
 
 **[Enlace en español](https://www.miriam-lerma.com/posts/2021-05-14-sula/).**
 
+The idea is that you use the data as an example and you can adapt your data to calculate the foraging trip parameters.
+Also you can have most of the information accompany your original track information for check-ups in a GIS software.
+
 ## Installation
 
 ```{r, eval=FALSE}
