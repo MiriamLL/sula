@@ -103,7 +103,8 @@ GPS_edited<-contar_viajes(GPS_data=GPS_trip)
 This function calculates the distance from the colony of each location. Returns a new column called 'maxdist_km'.
 
 ```{r, echo=TRUE, eval=FALSE, warnings=FALSE}
-GPS_dist<-dist_colonia(GPS_data = GPS_edited, nest_loc=nest_loc)
+GPS_dist<-dist_colonia(GPS_edited = GPS_edited, 
+                       nest_loc=nest_loc)
 ```
 
 #### dist_puntos 📐
@@ -111,7 +112,8 @@ GPS_dist<-dist_colonia(GPS_data = GPS_edited, nest_loc=nest_loc)
 This function calculates the distance between each location. Returns a new column called 'pointsdist_km'.
 
 ```{r, echo=TRUE, eval=FALSE, warnings=FALSE}
-GPS_dist<-dist_puntos(GPS_data = GPS_edited)
+GPS_dist<-dist_puntos(GPS_data = GPS_edited,
+                      separador='trip_number')
 ```
 
 #### calcular_duracion ⏳
@@ -120,9 +122,10 @@ This function calculates the duration of each trip. Returns a new data frame wit
 
 ```{r, eval=FALSE}
 duracion<-calcular_duracion(GPS_data = GPS_edited,
-                              col_diahora = "tStamp",
-                              formato = "%Y-%m-%d %H:%M:%S",
-                              unidades="hours")
+                            col_diahora = "tStamp",
+                            formato = "%Y-%m-%d %H:%M:%S",
+                            unidades="hours",
+                            separador="trip_number")
 ```
 
 #### calcular_totaldist 📐
@@ -130,7 +133,8 @@ duracion<-calcular_duracion(GPS_data = GPS_edited,
 This function calculates the total distance travelled by each trip.
 
 ```{r, eval=FALSE}
-totaldist_km<-calcular_totaldist(GPS_edited = GPS_edited)
+totaldist_km<-calcular_totaldist(GPS_data= GPS_edited,
+                                 separador="trip_number")
 ```
 
 
@@ -139,7 +143,9 @@ totaldist_km<-calcular_totaldist(GPS_edited = GPS_edited)
 This function calculates the maximum distance of each foraging trip. 
 
 ```{r, eval=FALSE}
-maxdist_km<-calcular_maxdist(GPS_data = GPS_edited, nest_loc=nest_loc)
+maxdist_km<-calcular_maxdist(GPS_data = GPS_edited, 
+                             nest_loc=nest_loc,
+                             separador="trip_number")
 ```
 
 
@@ -149,9 +155,10 @@ Calculates trip duration, total distance from the colony and maximum distance an
 
 ```{r, eval=FALSE}
 trip_params<-calcular_tripparams(GPS_data = GPS_edited,
-                              col_diahora = "tStamp",
+                              diahora_col = "tStamp",
                               formato = "%Y-%m-%d %H:%M:%S",
-                              nest_loc=nest_loc)
+                              nest_loc=nest_loc,
+                              separador="trip_number")
 ```
 
 #### recortar_por_ID  ✂️✂️✂️
@@ -180,20 +187,34 @@ Nidos_df<-localizar_nidos(GPS_data=GPS_raw,
 This functions adds the columns: maximum distance from the colony per location, distance between locations, trip number  
 
 ```{r, eval=FALSE}
-GPS_preparado<-preparar_varios(GPS_data=GPS_raw,ID_col="IDs",
-                               lon_col="Longitude",lat_col="Latitude",
-                               distancia_km=1,sistema_ref="+init=epsg:4326")
+GPS_preparado<-preparar_varios(GPS_data=GPS_raw,
+                               ID_col="IDs",
+                               lon_col="Longitude",
+                               lat_col="Latitude",
+                               distancia_km=1,
+                               sistema_ref="+init=epsg:4326")
 ```
 
 #### tripparams_varios 📐📐📐
 
 This function calculates trip parameters for several individuals.
 
+**Note** to use this function, your data must be in date and time format. 
+Otherwise you can use the function **ajustar_hora** to convert it to the correct object class. 
+
+```{r, eval=FALSE}
+GPS_preparado<-ajustar_hora(GPS_data = GPS_preparado,
+                            dif_hor = 0,
+                            dia_col = 'DateGMT',
+                            hora_col = 'TimeGMT',
+                            formato="%d/%m/%Y %H:%M:%S")
+```
+
 ```{r, eval=FALSE}
 trip_params<-tripparams_varios(GPS_data=GPS_preparado,
                                col_ID = "IDs",
-                               col_tripnum="trip_number",
-                               ol_diahora="hora_corregida")
+                               col_diahora="hora_corregida",
+                               separador="trip_number")
 ```
 
 

@@ -55,7 +55,9 @@ GPS_recortado<-recortar_periodo(GPS_data=GPS_01,
                                 dia_col='DateGMT',
                                 hora_col='TimeGMT',
                                 formato="%d/%m/%Y %H:%M:%S")
-#> El track original contenia 1038 filas y el track editado contiene 986 filas
+#> 
+#>  ES: El track original contenia 1038 filas y el track editado contiene 986 filas 
+#>  EN: The original track had1038 the edited track has 986
 ```
 
 #### localizar\_nido 🐣
@@ -96,7 +98,8 @@ This function calculates the distance from the colony of each location.
 Returns a new column called ‘maxdist\_km’.
 
 ``` r
-GPS_dist<-dist_colonia(GPS_data = GPS_edited, nest_loc=nest_loc)
+GPS_dist<-dist_colonia(GPS_edited = GPS_edited, 
+                       nest_loc=nest_loc)
 ```
 
 #### dist\_puntos 📐
@@ -105,7 +108,8 @@ This function calculates the distance between each location. Returns a
 new column called ‘pointsdist\_km’.
 
 ``` r
-GPS_dist<-dist_puntos(GPS_data = GPS_edited)
+GPS_dist<-dist_puntos(GPS_data = GPS_edited,
+                      separador='trip_number')
 ```
 
 #### calcular\_duracion ⏳
@@ -115,9 +119,10 @@ frame with four columns: trip\_id, trip\_start, trip\_end y duration.
 
 ``` r
 duracion<-calcular_duracion(GPS_data = GPS_edited,
-                              col_diahora = "tStamp",
-                              formato = "%Y-%m-%d %H:%M:%S",
-                              unidades="hours")
+                            col_diahora = "tStamp",
+                            formato = "%Y-%m-%d %H:%M:%S",
+                            unidades="hours",
+                            separador="trip_number")
 ```
 
 #### calcular\_totaldist 📐
@@ -125,7 +130,8 @@ duracion<-calcular_duracion(GPS_data = GPS_edited,
 This function calculates the total distance travelled by each trip.
 
 ``` r
-totaldist_km<-calcular_totaldist(GPS_edited = GPS_edited)
+totaldist_km<-calcular_totaldist(GPS_data= GPS_edited,
+                                 separador="trip_number")
 ```
 
 #### calcular\_maxdist 📏
@@ -133,7 +139,9 @@ totaldist_km<-calcular_totaldist(GPS_edited = GPS_edited)
 This function calculates the maximum distance of each foraging trip.
 
 ``` r
-maxdist_km<-calcular_maxdist(GPS_data = GPS_edited, nest_loc=nest_loc)
+maxdist_km<-calcular_maxdist(GPS_data = GPS_edited, 
+                             nest_loc=nest_loc,
+                             separador="trip_number")
 ```
 
 #### calcular\_tripparams 📐⏳📏
@@ -143,9 +151,10 @@ distance and returns a data frame with the information.
 
 ``` r
 trip_params<-calcular_tripparams(GPS_data = GPS_edited,
-                              col_diahora = "tStamp",
+                              diahora_col = "tStamp",
                               formato = "%Y-%m-%d %H:%M:%S",
-                              nest_loc=nest_loc)
+                              nest_loc=nest_loc,
+                              separador="trip_number")
 ```
 
 #### recortar\_por\_ID ✂️✂️✂️
@@ -177,20 +186,35 @@ This functions adds the columns: maximum distance from the colony per
 location, distance between locations, trip number
 
 ``` r
-GPS_preparado<-preparar_varios(GPS_data=GPS_raw,ID_col="IDs",
-                               lon_col="Longitude",lat_col="Latitude",
-                               distancia_km=1,sistema_ref="+init=epsg:4326")
+GPS_preparado<-preparar_varios(GPS_data=GPS_raw,
+                               ID_col="IDs",
+                               lon_col="Longitude",
+                               lat_col="Latitude",
+                               distancia_km=1,
+                               sistema_ref="+init=epsg:4326")
 ```
 
 #### tripparams\_varios 📐📐📐
 
 This function calculates trip parameters for several individuals.
 
+**Note** to use this function, your data must be in date and time
+format. Otherwise you can use the function **ajustar\_hora** to convert
+it to the correct object class.
+
+``` r
+GPS_preparado<-ajustar_hora(GPS_data = GPS_preparado,
+                            dif_hor = 0,
+                            dia_col = 'DateGMT',
+                            hora_col = 'TimeGMT',
+                            formato="%d/%m/%Y %H:%M:%S")
+```
+
 ``` r
 trip_params<-tripparams_varios(GPS_data=GPS_preparado,
                                col_ID = "IDs",
-                               col_tripnum="trip_number",
-                               ol_diahora="hora_corregida")
+                               col_diahora="hora_corregida",
+                               separador="trip_number")
 ```
 
 # Citation
