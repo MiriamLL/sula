@@ -28,7 +28,7 @@ preparar_varios<-function(GPS_data=GPS_data,
   ID_col<-ID_col
   
   cat("\n ES: Apareceran algunos warnings.
-      \n EN: Warnings will appear.")
+      \n EN: Warnings will appear.\n")
   
   # separa los individuos
   GPS_primero_ls<-split(GPS_df,GPS_df[[ID_col]])
@@ -227,4 +227,8 @@ preparar_varios<-function(GPS_data=GPS_data,
   GPS_doceavo_df$`data$trip_number`<-NULL
   
   return(GPS_doceavo_df)
+  
+  cat("\n ES: Los warning son por la transformacion de los datos a objeto espacial.
+      \n EN: Warnings will appear because the data frame was transformed to spatial object.\n")
+  
 }

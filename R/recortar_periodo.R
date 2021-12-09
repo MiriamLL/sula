@@ -42,7 +42,7 @@ recortar_periodo<-function(GPS_data=GPS_data,
   cat(paste0("\n ES: El track original contenia ", nrow(GPS_data),
              " filas y el track editado contiene ", nrow(recortado), 
              " filas \n EN: The original track had ",nrow(GPS_data),
-             "rows, and the edited track has ",nrow(recortado)))
+             " rows, and the edited track has ",nrow(recortado)))
   
   return(recortado)
 }

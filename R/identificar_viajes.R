@@ -75,7 +75,7 @@ identificar_viajes<-function(GPS_data=GPS_data,
   track_df$trip<-gsub("1", "N", track_df$trip)
   track_df$trip<-gsub("0", "Y", track_df$trip)
   
-  cat("\n SP: Una columna llada trip fue agregada a la tabla. Y corresponde a registros dentro del rango y N a registros fuera del rango 
-      \n EN: A column named trip was added to the data frame. Y corresponds locations outside the range, and N to locations inside the range")
+  cat("\n SP: Una columna llamada trip fue agregada. \n Y corresponde a registros dentro del rango y N a registros fuera del rango 
+      \n EN: A column named trip was added to the data frame. \n Y corresponds locations outside the range, and N to locations inside the range")
   return(track_df)
 }
