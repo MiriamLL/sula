@@ -224,10 +224,10 @@ trip_params<-tripparams_varios(GPS_data=GPS_preparado,
 
 # Citation
 
-The data comes from this publications. 🔓  
-- Lerma M, Dehnhard N, Luna-Jorquera G, Voigt CC, Garthe S (2020)
+-   The data comes from this publication: Lerma M, Dehnhard N, Luna-Jorquera G, Voigt CC, Garthe S (2020)
 Breeding stage, not sex, affects foraging characteristics in masked
-boobies at Rapa Nui. Behavioral ecology and sociobiology 74: 149.
+boobies at Rapa Nui. Behavioral ecology and sociobiology 74: 149. 🔓  
+
 
 -   Lerma M (2021) Package sula. Zenodo.
     <http://doi.org/10.5281/zenodo.4682898>
