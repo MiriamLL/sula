@@ -58,6 +58,6 @@ dist_colonia<-function(GPS_edited=GPS_edited,
   return(meters_df)
   #cat("A column named maxdist_km was added to the data frame, 
   #           the values correspond to distance of each point from the colony")
-  cat("Una columna llamada maxdist_km fue agregada al data frame, 
-             los valores corresponden a la distancia de cada punto del nido")
+  cat("\n SP: Una columna llamada maxdist_km fue agregada al data frame, los valores corresponden a la distancia de cada punto del nido \n 
+      EN: A new column named maxdist_km was added to the data frame, the values are the distance of each location to the colony")
 }

@@ -23,8 +23,12 @@ contar_viajes<-function(GPS_data=GPS_data){
   
   #cat(paste0("Original track contained ", nrow(trip_data),
   #           " rows and the edited track contains ", nrow(only_trips), " rows"))
-  cat(paste0("El track original contenia ", nrow(trip_data),
-             " filas y el track editado contiene ", nrow(only_trips), " filas"))
+  cat(paste0("\n ES: El track original contenia ", nrow(trip_data),
+             " filas y ", nrow(only_trips), 
+             " filas son registros cuando estaba fuera de la colonia",
+             "\n EN: The original track had ", nrow(trip_data),
+             " rows, and ", nrow(only_trips), 
+             " are locations outside the colony"))
   
   return(only_trips)
 }

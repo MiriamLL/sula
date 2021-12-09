@@ -2,7 +2,6 @@
 #'
 #' @param GPS_data un data frame con columnas que incluyan identificador por individuo, identificador por viaje, y una columna en dia y hora.
 #' @param col_ID el nombre de la columna del data frame que incluye el identificador del individuo
-#' @param col_tripnum el nombre de la columna del data frame que incluye el identificador del viaje
 #' @param col_diahora el nombre de la columna del data frame que incluye el dia y hora en formato POSTIXct
 #' @param separador El nombre de la columna a usar para separar los viajes, puede ser el numero del viaje o separar por individuos. Escribir entre  comillas.
 #'
@@ -11,12 +10,10 @@
 #'
 #' @examples trip_params<-tripparams_varios(GPS_data=GPS_preparado,
 #' col_ID = "IDs",
-#' col_tripnum="trip_number",
 #' col_diahora="hora_corregida",
-#' separador='trip_number')
+#' separador="trip_number")
 tripparams_varios<-function(GPS_data = GPS_data,
                             col_ID = col_ID,
-                            col_tripnum=col_tripnum,
                             col_diahora=col_diahora,
                             separador=separador){
   
@@ -30,10 +27,17 @@ tripparams_varios<-function(GPS_data = GPS_data,
     warning("Please check the name on the GPS_data data frame")
   }
   
-  GPS_data$trip_ID<-paste0(GPS_data[[col_ID]],"_",GPS_data[[col_tripnum]])
+  clase<-class(GPS_data[[col_diahora]])
+  clase_check<-clase[1]
+  if(clase_check == "POSIXct") {
+  } else {
+    warning("Please provide an object POSIXct in col_diahora")
+  }
   
-  GPS_data$separador<-(GPS_data[[separador]])
-  Viajes_ls<-split(GPS_data,GPS_data$separador)
+  
+  GPS_data$trip_ID<-paste0(GPS_data[[col_ID]],"_",GPS_data[[separador]])
+  
+  Viajes_ls<-split(GPS_data,GPS_data$trip_ID)
   
   #############
   ### HORAS ###

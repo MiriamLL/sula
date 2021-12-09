@@ -59,7 +59,8 @@ dist_puntos<-function(GPS_data = GPS_data,separador=separador){
   
   Viajes_df<- do.call("rbind",Viajes_list)
   
-  cat("Una columna llamada pointsdist_km fue agregada al data frame,los valores corresponden a la distancia entre cada punto GPS")
+  cat("\n ES: Una columna llamada pointsdist_km fue agregada al data frame, los valores corresponden a la distancia entre cada punto GPS.
+      \n EN: A new column named pointsdist_km was added to the data frame, the values are the distance between locations.")
   
   return(Viajes_df)
 }
