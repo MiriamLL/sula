@@ -1,0 +1,9 @@
+citHeader("To cite the sula package in publications you can use:")
+
+citEntry(
+entry="Package",
+title = "sula: A package to clean, manipulate and calculate foraging trip parameters from GPS data",
+year = "2021",
+author = "M. Lerma",
+textVersion = "Lerma M (2021) sula: A package to clean, manipulate and calculate foraging trip parameters from GPS data. https://doi.org/10.5281/zenodo.4740920"
+)

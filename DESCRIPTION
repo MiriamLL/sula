@@ -1,5 +1,5 @@
 Package: sula
-Title: This package loads and manipulates data from GPS
+Title: A package to clean, manipulate and calculate foraging trip parameters from GPS data
 Version: 0.0.0.9000
 Authors@R: 
   person(given = "Miriam",
