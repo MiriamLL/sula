@@ -5,7 +5,7 @@
 
 [![DOI](https://zenodo.org/badge/354821022.svg)](https://zenodo.org/badge/latestdoi/354821022)
 
-This packages contains: <br>  
+This package contains: <br>  
 - **Tracking data** from Masked boobies *(Sula dactylatra)* collected at
 Easter Island.  
 - **Functions** to clean your data and calculate the foraging trip
@@ -14,10 +14,10 @@ parameters of the individuals.
 **[Enlace en
 español](https://www.miriam-lerma.com/posts/2021-05-14-sula/).**
 
-The idea is that you use the data as an example and you can adapt your
-data to calculate the foraging trip parameters. Also you can have most
-of the information accompany your original track information for
-check-ups in a GIS software.
+The goal is that you use the data as an example and adapt your data
+accordingly to calculate your own foraging trip parameters. Also you can
+have most of the information in parallel to your original tracking data
+for check-ups in a GIS software.
 
 ## Installation
 
@@ -222,14 +222,38 @@ trip_params<-tripparams_varios(GPS_data=GPS_preparado,
                                separador="trip_number")
 ```
 
+# Other tools
+
+## Interpolate data
+
+This function interpolates the data according to a set interval
+
+**GPS\_preparado** is your data frame with the columns “Latitude” and
+“Longitude”  
+Set an **interval**, for example “900 secs”  
+Define which is the name of the column that contains the information
+from day and time (**col\_diahora**). For example: “tStamp”  
+A **separator**, for example, ‘trip\_number’  
+This function runs for several individuals therefore the **col\_ID**
+should correspond to the name of your column with the individuals’ ID
+
+``` r
+GPS_interpolated<-interpolar_viajes(GPS_preparado=GPS_preparado, 
+                                    intervalo="900 sec", 
+                                    col_diahora="dia_hora", 
+                                    separador='trip_number',
+                                    col_ID='IDs')
+```
+
 # Citation
 
-The data comes from this publications. 🔓  
+The data comes from this publication 🔓  
 - Lerma M, Dehnhard N, Luna-Jorquera G, Voigt CC, Garthe S (2020)
 Breeding stage, not sex, affects foraging characteristics in masked
 boobies at Rapa Nui. Behavioral ecology and sociobiology 74: 149.
 
--   Lerma M (2021) Package sula. Zenodo.
-    <http://doi.org/10.5281/zenodo.4682898>
+The package can be cited as:  
+- Lerma M (2021) Package sula. Zenodo.
+<http://doi.org/10.5281/zenodo.4682898>
 
 [![DOI](https://zenodo.org/badge/354821022.svg)](https://zenodo.org/badge/latestdoi/354821022)
