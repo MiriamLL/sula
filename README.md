@@ -3,7 +3,7 @@
 
 # sula <img src="man/figures/logo.png" align="right" width = "120px"/>
 
-[![DOI](https://zenodo.org/badge/354821022.svg)](https://zenodo.org/badge/latestdoi/354821022)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4740920.svg)](https://doi.org/10.5281/zenodo.4740920)
 
 This package contains: <br>  
 - **Tracking data** from Masked boobies *(Sula dactylatra)* collected at
@@ -254,6 +254,6 @@ boobies at Rapa Nui. Behavioral ecology and sociobiology 74: 149.
 
 The package can be cited as:  
 - Lerma M (2021) Package sula. Zenodo.
-<http://doi.org/10.5281/zenodo.4682898>
+<https://doi.org/10.5281/zenodo.4740920>
 
-[![DOI](https://zenodo.org/badge/354821022.svg)](https://zenodo.org/badge/latestdoi/354821022)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4740920.svg)](https://doi.org/10.5281/zenodo.4740920)
