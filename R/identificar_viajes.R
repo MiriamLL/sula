@@ -11,7 +11,7 @@
 #' GPS_01_trips<-identificar_viajes(GPS_data=GPS_01,nest_loc=nest_loc,distancia_km=0.01)
 identificar_viajes<-function(GPS_data=GPS_data,
                              nest_loc=nest_loc,
-                             distancia_km=1){
+                             distancia_km=distancia_km){
   
   if ("Latitude" %in% colnames(GPS_data)){
   } else {

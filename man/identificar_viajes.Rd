@@ -4,7 +4,11 @@
 \alias{identificar_viajes}
 \title{Agrega columna identificando viajes}
 \usage{
-identificar_viajes(GPS_data = GPS_data, nest_loc = nest_loc, distancia_km = 1)
+identificar_viajes(
+  GPS_data = GPS_data,
+  nest_loc = nest_loc,
+  distancia_km = distancia_km
+)
 }
 \arguments{
 \item{GPS_data}{es el data frame con datos de GPS con las columnas Latitude y Longitude}
