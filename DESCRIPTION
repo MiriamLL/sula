@@ -1,6 +1,7 @@
 Package: sula
 Title: A package to clean, manipulate and calculate foraging trip parameters from GPS data
-Version: 0.0.0.9000
+Version: 1.0.1
+Date: 2021-05-06
 Authors@R: 
   person(given = "Miriam",
          family = "Lerma",
