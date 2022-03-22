@@ -31,9 +31,6 @@ Corrige el tiempo de acuerdo a la zona horaria.
 }
 \examples{
 t_formato="\%d/\%m/\%Y \%H:\%M:\%S"
-GPS_gmt<-ajustar_hora(GPS_data = GPS_raw, 
-dif_hor = 5,
-dia_col = 'DateGMT',
-hora_col = 'TimeGMT',
-formato=t_formato)
+GPS_gmt<-ajustar_hora(GPS_data = GPS_raw, dif_hor = 5,
+dia_col = 'DateGMT', hora_col = 'TimeGMT',formato=t_formato)
 }

@@ -11,10 +11,7 @@
 #'
 #' @examples nest_loc=data.frame(Longitude = -109.4531,Latitude = -27.20097)
 #' trip_params<-calcular_tripparams(GPS_data = GPS_edited,
-#' diahora_col = "tStamp",
-#' formato = "%Y-%m-%d %H:%M:%S",
-#' nest_loc=nest_loc,
-#' separador='trip_number')
+#' diahora_col = "tStamp",formato = "%Y-%m-%d %H:%M:%S",nest_loc=nest_loc,separador='trip_number')
 calcular_tripparams<-function(GPS_data = GPS_data,
                               diahora_col=diahora_col,
                               formato=formato,

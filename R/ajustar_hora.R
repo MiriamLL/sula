@@ -11,11 +11,8 @@
 #'
 #' @examples 
 #' t_formato="%d/%m/%Y %H:%M:%S"
-#' GPS_gmt<-ajustar_hora(GPS_data = GPS_raw, 
-#' dif_hor = 5,
-#' dia_col = 'DateGMT',
-#' hora_col = 'TimeGMT',
-#' formato=t_formato)
+#' GPS_gmt<-ajustar_hora(GPS_data = GPS_raw, dif_hor = 5,
+#' dia_col = 'DateGMT', hora_col = 'TimeGMT',formato=t_formato)
 ajustar_hora <- function(GPS_data=GPS_data, 
                          dif_hor=dif_hor,
                          dia_col=dia_col,
