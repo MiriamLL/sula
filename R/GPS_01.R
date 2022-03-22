@@ -6,7 +6,7 @@
 #'
 #' @docType data
 #'
-#' @usage data(GPS_raw)
+#' @usage data(GPS_01)
 #'
 #' @format Data frame contiene datos de un individuo. 
 #' Las columnas son Latitude, Longitude, DateGMT, TimeGMT, tStamp e ID. 
