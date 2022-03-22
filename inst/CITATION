@@ -1,0 +1,8 @@
+bibentry(
+  bibtype =  "Manual",
+  title    = "sula: A package to clean, manipulate and calculate foraging trip parameters from GPS data",
+  author   = "Lerma Miriam",
+  year     = "2021",
+  doi = "10.5281/zenodo.4740920",
+  textVersion = "Lerma M (2021) sula: A package to clean, manipulate and calculate foraging trip parameters from GPS data. https://doi.org/10.5281/zenodo.4740920"
+)
