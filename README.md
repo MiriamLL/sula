@@ -68,7 +68,7 @@ GPS_recortado<-recortar_periodo(GPS_data=GPS_01,
 #### localizar\_nido 🐣
 
 This functions identifies the location of the nest assuming that the
-first column is the nest location.
+first row is the nest location.
 
 ``` r
 nest_loc<-localizar_nido(GPS_data = GPS_01,
