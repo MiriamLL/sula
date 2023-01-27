@@ -17,10 +17,10 @@ localizar_nidos<-function(GPS_data=GPS_data,
   GPS_df<-as.data.frame(GPS_data)
   
   GPS_df<- GPS_df %>% 
-    dplyr::mutate(ID=GPS_df[[ID_col]])
+    dplyr::mutate(IDs=GPS_df[[ID_col]])
   
   # separa los individuos
-  GPS_list<-split(GPS_df,GPS_df$ID)
+  GPS_list<-split(GPS_df,GPS_df$IDs)
   
   # crear lista vacia
   Nidos_list<-list()
