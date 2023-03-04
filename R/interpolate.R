@@ -44,8 +44,6 @@ interpolate<-function (GPS_data = GPS_data,
   
   New_coords <- cbind(New_longitude1, New_latitude1)
   
-  New_coords$trip_number <- unique(Inter_df$trip_number)
-  
   DateTimeGMT <- "DateTimeGMT"
   Latitude <- "Latitude"
   Longitude <- "Longitude"
