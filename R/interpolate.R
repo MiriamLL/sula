@@ -24,6 +24,16 @@ interpolate<-function (GPS_data = GPS_data,
   Inter_df$Longitude <- Inter_df[[column_lon]]
   Inter_df$Latitude <- Inter_df[[column_lat]]
   
+  Inter_df<-Inter_df[,c('dt','Longitude','Latitude')]
+  colnames(Inter_df)<-c('dt','Longitude','Latitude')
+  
+  
+  ifelse(class(Inter_df$dt) != "POSIXct", {
+    print(paste("Your column_datetime class is",class(Inter_df$dt)));
+    ("Please change the class of your column_datetime, currently is not POSIXct")
+  },
+  print("false"))
+  
   New_longitude0 <- stats::approx(Inter_df$dt, Inter_df$Longitude, 
                                   xout = seq(min(Inter_df$dt), max(Inter_df$dt), by = interval))
   New_longitude1 <- data.frame(x = New_longitude0$x, y = New_longitude0$y)
