@@ -38,7 +38,7 @@ interpolate_by_group<-function(GPS_data = GPS_data,
   long_trips <- group_list[unlist(small_trips)]
   
   for (i in seq_along(long_trips)) {
-    separate_groups <- long_trips[[1]]
+    separate_groups <- long_trips[[i]]
     
     
     new_longitude0 <- stats::approx(separate_groups$dt, separate_groups$Longitude, 
@@ -55,7 +55,7 @@ interpolate_by_group<-function(GPS_data = GPS_data,
     colnames(new_coords)<-c('dt','Longitude','x','Latitude','group')
     new_coords<-new_coords[c('group','dt','Longitude','Latitude')]
     
-    long_trips[[1]] <- new_coords
+    long_trips[[i]] <- new_coords
   }
   
   interpolation_df<- do.call("rbind", long_trips)
