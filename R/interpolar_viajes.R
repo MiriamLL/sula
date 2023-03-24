@@ -2,9 +2,9 @@
 #'
 #' @param GPS_preparado es el data frame con columnas "Latitude", "Longitude" y "tStamp"
 #' @param intervalo es el intervalo al que quieres convertir tu track, por ejemplo "900 secs" 
-#' @param col_diahora es la columna con la informacion de dia y hora, en formato POSIXct, por ejemplo "tStamp"
+#' @param columna_diahora es la columna con la informacion de dia y hora, en formato POSIXct, por ejemplo "tStamp"
 #' @param separador es la columna con la informacion de los viajes, por ejemplo 'trip_number'
-#' @param col_ID es la columna con la informacion de los invididuos, por ejemplo "ID"
+#' @param columna_ID es la columna con la informacion de los invididuos, por ejemplo "ID"
 #'
 #' @return el data frame con datos a cada intervalo de tiempo
 #' @export
