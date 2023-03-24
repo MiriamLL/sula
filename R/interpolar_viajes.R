@@ -11,26 +11,26 @@
 #'
 #' @examples GPS_interpolated<-interpolar_viajes(GPS_preparado=GPS_preparado, 
 #' intervalo="900 sec", 
-#' col_diahora="dia_hora", 
+#' columna_diahora="dia_hora", 
 #' separador='trip_number',
-#' col_ID='IDs')
+#' columna_ID='IDs')
 #' 
 interpolar_viajes<-function(GPS_preparado=GPS_preparado,
                                 intervalo=intervalo,
-                                col_diahora=col_diahora,
-                                col_ID=col_ID,
+                                columna_diahora=columna_diahora,
+                                columna_ID=columna_ID,
                                 separador=separador){
   
   
   Data<-GPS_preparado
   
   # Separate trips
-  if (!is.null(Data[[col_diahora]])) {
+  if (!is.null(Data[[columna_diahora]])) {
   } else {
     warning("Please check the name in col_diahora")
   }
   
-  Data$ID_trip<-paste0((Data[[col_ID]]),"_",(Data[[separador]]))
+  Data$ID_trip<-paste0((Data[[columna_ID]]),"_",(Data[[separador]]))
   
   Trips_ls<-split(Data,Data$ID_trip)
   
@@ -46,7 +46,7 @@ interpolar_viajes<-function(GPS_preparado=GPS_preparado,
     #funcion
     Inter_df<-Separated_df
     
-    Inter_df$dt<-Inter_df[[col_diahora]]#as.POSIXct(strptime(Inter_df$timestamp, "%Y-%m-%d %H:%M:%S"), "GMT")
+    Inter_df$dt<-Inter_df[[columna_diahora]]#as.POSIXct(strptime(Inter_df$timestamp, "%Y-%m-%d %H:%M:%S"), "GMT")
     
     New_longitude0<-stats::approx(Inter_df$dt,Inter_df$Longitude,xout=seq(min(Inter_df$dt),max(Inter_df$dt),by=intervalo))
     New_longitude1<-data.frame(x=New_longitude0$x,y=New_longitude0$y)
@@ -56,18 +56,21 @@ interpolar_viajes<-function(GPS_preparado=GPS_preparado,
     
     New_coords<-cbind(New_longitude1,New_latitude1)
     
-    New_coords$ID<-unique(Inter_df$IDs)
+    
+    colnames(New_coords)<-c('x1','x2','x3','x4')
+    
+    New_coords$dt<-New_coords$x1
+    New_coords$Longitude<-New_coords$x2
+    New_coords$Latitude<-New_coords$x4
     New_coords$trip_number<-unique(Inter_df$trip_number)
+    New_coords$ID<-unique(Separated_df$ID_trip)
     
-    New_coords$dt<-New_longitude1$x
-    New_coords$Longitude<-New_longitude1$x
+    New_coords$x1<-NULL
+    New_coords$x2<-NULL
+    New_coords$x3<-NULL
+    New_coords$x4<-NULL
     
-    New_coords$Latitude<-New_latitude1$x
-    
-    New_coords$x<-NULL
-    New_coords$y<-NULL
-    New_coords$x<-NULL
-    New_coords$y<-NULL
+    row.names(New_coords)=NULL
     
     Long_trips_ls[[i]]<- New_coords
   }

@@ -7,8 +7,8 @@
 interpolar_viajes(
   GPS_preparado = GPS_preparado,
   intervalo = intervalo,
-  col_diahora = col_diahora,
-  col_ID = col_ID,
+  columna_diahora = columna_diahora,
+  columna_ID = columna_ID,
   separador = separador
 )
 }
@@ -17,9 +17,9 @@ interpolar_viajes(
 
 \item{intervalo}{es el intervalo al que quieres convertir tu track, por ejemplo "900 secs"}
 
-\item{col_diahora}{es la columna con la informacion de dia y hora, en formato POSIXct, por ejemplo "tStamp"}
+\item{columna_diahora}{es la columna con la informacion de dia y hora, en formato POSIXct, por ejemplo "tStamp"}
 
-\item{col_ID}{es la columna con la informacion de los invididuos, por ejemplo "ID"}
+\item{columna_ID}{es la columna con la informacion de los invididuos, por ejemplo "ID"}
 
 \item{separador}{es la columna con la informacion de los viajes, por ejemplo 'trip_number'}
 }
@@ -32,8 +32,8 @@ Interpola los viajes de acuerdo a intervalo
 \examples{
 GPS_interpolated<-interpolar_viajes(GPS_preparado=GPS_preparado, 
 intervalo="900 sec", 
-col_diahora="dia_hora", 
+columna_diahora="dia_hora", 
 separador='trip_number',
-col_ID='IDs')
+columna_ID='IDs')
 
 }
