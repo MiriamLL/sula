@@ -226,7 +226,8 @@ trip_params<-tripparams_varios(GPS_data=GPS_preparado,
 
 ## Interpolate data per individual
 
-This function interpolates the data according to a set interval
+This function interpolates the data according to a set interval, your
+data already contains a column named Latitude and Longitude
 
 ``` r
 GPS_interpolated<-interpolar_viajes(GPS_preparado =  GPS_preparado, 
