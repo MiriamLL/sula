@@ -224,9 +224,19 @@ trip_params<-tripparams_varios(GPS_data=GPS_preparado,
 
 # Other tools
 
-## Interpolate data per group
+## Interpolate data per individual
 
 This function interpolates the data according to a set interval
+
+``` r
+GPS_interpolated<-interpolar_viajes(GPS_preparado =  GPS_preparado, 
+                                    intervalo = "900 sec", 
+                                    columna_diahora = "dia_hora", 
+                                    columna_ID ='IDs',
+                                    separador='trip_number')
+```
+
+## Interpolate data per group
 
 ``` r
 GPS_interpolated<-interpolate_by_group(GPS_data = GPS_preparado, 
