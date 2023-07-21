@@ -10,7 +10,6 @@ contar_viajes<-function(GPS_data=GPS_data){
   
   trip_data<-GPS_data
   
-  #add secuence
   num_seq<-nrow(trip_data)
   num_seq<-as.numeric(num_seq)
   trip_data$num_seq<-paste(seq(1:num_seq))
@@ -18,8 +17,21 @@ contar_viajes<-function(GPS_data=GPS_data){
   #subset only trips
   only_trips<-subset(trip_data,trip_data$trip == "Y")
   only_trips$num_seq<-as.integer(only_trips$num_seq)
+  
+  #subset only trips
   only_trips$trip_number<-(cumsum(c(1L, diff(only_trips$num_seq)) != 1L))
-  only_trips$trip_number<-paste0("trip_",only_trips$trip_number+1)
+  only_trips$trip_number<-only_trips$trip_number+1
+  only_trips$trip_number<-stringr::str_pad(only_trips$trip_number, 3, pad = "0")
+  only_trips$trip_number<-paste0("trip_",only_trips$trip_number)
+  
+  #before
+  #num_seq<-nrow(trip_data)
+  #num_seq<-as.numeric(num_seq)
+  #trip_data$num_seq<-paste(seq(1:num_seq))
+  #only_trips<-subset(trip_data,trip_data$trip == "Y")
+  #only_trips$num_seq<-as.integer(only_trips$num_seq)
+  #only_trips$trip_number<-(cumsum(c(1L, diff(only_trips$num_seq)) != 1L))
+  #only_trips$trip_number<-paste0("trip_",only_trips$trip_number+1)
   
   #cat(paste0("Original track contained ", nrow(trip_data),
   #           " rows and the edited track contains ", nrow(only_trips), " rows"))
