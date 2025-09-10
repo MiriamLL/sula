@@ -40,18 +40,18 @@ calcular_totaldist<-function(GPS_data = GPS_data, separador=separador){
   for( i in seq_along(Viajes_list)){
   
     Viaje_df<-Viajes_list[[i]]  
-    Viaje_coords<- Viaje_df[,c('Longitude','Latitude')]
-    Viaje_spatial <- sp::SpatialPointsDataFrame(coords = Viaje_coords, data = Viaje_df)
-    sp::proj4string(Viaje_spatial)= sp::CRS("+init=epsg:4326")  
     
-    #calcula la distancia para cada punto  
-    Viaje_distancias<-sapply(2:nrow(Viaje_spatial),
-                             function(i){geosphere::distm( Viaje_spatial[i-1,], Viaje_spatial[i,])})
+    coords <- as.matrix(Viaje_df[, c("Longitude", "Latitude")])
     
-    #c(sf::st_distance(my_df[-1,],my_df[-nrow(my_df),],by_element=TRUE),NA)
+    # Compute distances between consecutive points
+    if (nrow(coords) >= 2) {
+      dist_vector <- geosphere::distHaversine(coords[-nrow(coords), ], coords[-1, ])
+      dist_vector <- c(NA, dist_vector)  # Align with rows
+    } else {
+      dist_vector <- rep(NA, nrow(coords))
+    }
     
-    Viaje_distancias<-c(NA,Viaje_distancias)
-    Viaje_df$pointsdist_km<-round(Viaje_distancias/1000,2)
+    Viaje_df$pointsdist_km<-round(dist_vector/1000,2)
     
     Viajes_list[[i]]<-Viaje_df
 }

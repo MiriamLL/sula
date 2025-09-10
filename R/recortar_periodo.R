@@ -11,11 +11,11 @@
 #' @export
 #'
 #' @examples GPS_recortado<-recortar_periodo(GPS_data=GPS_01,
-#'inicio='02/11/2017 18:10:00',
-#'final='05/11/2017 14:10:00',
-#'dia_col='DateGMT',
-#'hora_col='TimeGMT',
-#'formato="%d/%m/%Y %H:%M:%S")
+#' inicio='02/11/2017 18:10:00',
+#' final='05/11/2017 14:10:00',
+#' dia_col='DateGMT',
+#' hora_col='TimeGMT',
+#' formato="%d/%m/%Y %H:%M:%S")
 recortar_periodo<-function(GPS_data=GPS_data,
                            dia_col=dia_col,
                            hora_col=hora_col,

@@ -27,9 +27,6 @@ preparar_varios<-function(GPS_data=GPS_data,
   
   ID_col<-ID_col
   
-  cat("\n ES: Apareceran algunos warnings.
-      \n EN: Warnings will appear.\n")
-  
   # separa los individuos
   GPS_primero_ls<-split(GPS_df,GPS_df[[ID_col]])
   
@@ -56,7 +53,7 @@ preparar_varios<-function(GPS_data=GPS_data,
     sp::proj4string(track_spatial)= sp::CRS(sistema_ref)
     track_spatial <- sp::spTransform(track_spatial, sp::CRS(sistema_ref))
     
-    # colonia
+    # buffer
     colonia<-Nest_loc
     colonia_spatial<- sp::SpatialPoints(cbind(colonia$Longitude,colonia$Latitude)) 
     sp::proj4string(colonia_spatial)= sp::CRS(sistema_ref) 
@@ -85,41 +82,35 @@ preparar_varios<-function(GPS_data=GPS_data,
     Nest_loc<-GPS_Ind %>%dplyr::summarise(Longitude = dplyr::first(GPS_Ind[[lon_col]]),
                                           Latitude  = dplyr::first(GPS_Ind[[lat_col]]), )
     
-    track_df<-as.data.frame(GPS_Ind)
-    track_spatial<-track_df
-    track_spatial$lat<-track_spatial[[lat_col]]
-    track_spatial$lon<-track_spatial[[lon_col]]
-    sp::coordinates(track_spatial)<-~lon+lat
-    sp::proj4string(track_spatial)= sp::CRS(sistema_ref)
-    track_spatial <- sp::spTransform(track_spatial, sp::CRS(sistema_ref))
+    # NEW
     
-    #colonia
+    # tracks
+    track_df<-as.data.frame(GPS_data)
+    track_spatial<-track_df
+    track_spatial$lat<-track_spatial$Latitude
+    track_spatial$lon<-track_spatial$Longitude
+    sp::coordinates(track_spatial)<-~lon+lat
+    sp::proj4string(track_spatial)= sp::CRS("+init=epsg:4326")
+    track_spatial <- sp::spTransform(track_spatial, sp::CRS("+init=epsg:4326"))
+    track_spatial<-sf::st_as_sf(track_spatial)
+    
+    # center buffer
     colonia<-Nest_loc
     colonia_spatial<- sp::SpatialPoints(cbind(colonia$Longitude,colonia$Latitude)) 
-    sp::proj4string(colonia_spatial)= sp::CRS(sistema_ref) 
-    colonia_spatial <- sp::spTransform(colonia_spatial, sp::CRS(sistema_ref))
+    sp::proj4string(colonia_spatial)= sp::CRS("+init=epsg:4326") 
+    colonia_spatial <- sp::spTransform(colonia_spatial, sp::CRS("+init=epsg:4326"))
+    colonia_spatial<-sf::st_as_sf(colonia_spatial)
     
-    # distancia_km
-    distancia_km_in<-distancia_km/100
-    distancia_buf<-rgeos::gBuffer(colonia_spatial, width=1*distancia_km_in) 
+    # distance
+    Distance_km<-distancia_km*1000
+    distancia_buffer<-sf::st_buffer(colonia_spatial, Distance_km)
     
-    # distancia_buffer
-    distancia_buffer<-distancia_buf
-    # tiene que ser convertido a data frame para que aparezca la columna
-    distancia_buffer_df<-data.frame(ID=1:length(distancia_buffer)) 
-    
-    #problema nota con slot, agregar importFrom("methods", "slot") en NAMESPACE (manualmente)
-    distancia_buffer_id <- sapply(methods::slot(distancia_buffer, "polygons"), 
-                                  function(x) methods::slot(x, "ID"))
-    
-    distancia_buffer_df <- data.frame(ID=1:length(distancia_buffer), row.names = distancia_buffer_id)
-    distancia_buffer<- sp::SpatialPolygonsDataFrame(distancia_buffer, distancia_buffer_df)
-    sp::proj4string(distancia_buffer) <- sp::proj4string(track_spatial)
-    track_buffer<-sp::over(track_spatial, distancia_buffer) 
+    # over
+    track_buffer<-sapply(sf::st_intersects(track_spatial,distancia_buffer),
+                         function(z) if (length(z)==0) NA_integer_ else z[1])
     
     #todo lo que esta dentro del buffer es 1 y fuera es 0
-    track_buffer_df<-as.data.frame(track_buffer)
-    track_df$trip<-as.numeric(track_buffer_df$ID)
+    track_df$trip<-as.numeric(track_buffer)
     
     #sustituye nas por ceros
     track_df$trip[is.na(track_df$trip)] <- 0
@@ -220,7 +211,7 @@ preparar_varios<-function(GPS_data=GPS_data,
   var3<-c(ID_col,"trip_number","num_seq")
   
   GPS_doceavo_df<-GPS_onceavo_df %>% 
-    dplyr::relocate(var3)
+    dplyr::select(dplyr::all_of(var3))
   
   GPS_doceavo_df$trip<-NULL
   GPS_doceavo_df$`data$IDs`<-NULL

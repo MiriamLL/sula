@@ -77,19 +77,16 @@ calcular_tripparams<-function(GPS_data = GPS_data,
   for( i in seq_along(Viajes_list)){
     
     Viaje_df<-Viajes_list[[i]]  
-    Viaje_coords<- Viaje_df[,c('Longitude','Latitude')]
-    Viaje_spatial <- sp::SpatialPointsDataFrame(coords = Viaje_coords, data = Viaje_df)
-    sp::proj4string(Viaje_spatial)= sp::CRS("+init=epsg:4326")  
+
+    Viaje_coords <- as.matrix(Viaje_df[, c('Longitude', 'Latitude')])
     
-    #calcula la distancia para cada punto  
-    Viaje_distancias<-sapply(2:nrow(Viaje_spatial),
-                             function(i){geosphere::distm( Viaje_spatial[i-1,],
-                                                           Viaje_spatial[i,])})
+    Viaje_distancias <- sapply(2:nrow(Viaje_coords), function(i) {
+      geosphere::distHaversine(Viaje_coords[i - 1, ], Viaje_coords[i, ])
+    })
     
-    #c(sf::st_distance(my_df[-1,],my_df[-nrow(my_df),],by_element=TRUE),NA)
     
-    Viaje_distancias<-c(NA,Viaje_distancias)
-    Viaje_df$pointsdist_km<-round(Viaje_distancias/1000,2)
+    Viaje_distancias <- c(NA, Viaje_distancias)
+    Viaje_df$pointsdist_km <- round(Viaje_distancias / 1000, 2)
     
     Viajes_list[[i]]<-Viaje_df
   }
@@ -144,8 +141,10 @@ calcular_tripparams<-function(GPS_data = GPS_data,
     Viaje_spatial <- sp::SpatialPointsDataFrame(coords = Viaje_coords, data = Viaje_df)
     sp::proj4string(Viaje_spatial)= sp::CRS("+init=epsg:4326") 
     
+    Viaje_coords <- as.matrix(Viaje_df[, c('Longitude', 'Latitude')])
+    Nest_coords  <- as.matrix(Nest_df[, c('Longitude', 'Latitude')])
+    maxdist_m <- geosphere::distm(Viaje_coords, Nest_coords, fun = geosphere::distHaversine)
     
-    maxdist_m<-(geosphere::distm(Viaje_spatial,Nest_spatial,fun = geosphere::distHaversine))
     meters_df<-cbind(Viaje_df,maxdist_m)
     meters_df$maxdist_km<-round(meters_df$maxdist_m/1000,digits=2)
     meters_df$maxdist_m<-NULL

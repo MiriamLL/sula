@@ -15,18 +15,14 @@ knitr::opts_chunk$set(
 
 # sula  <img src="man/figures/logo.png" align="right" width = "120px"/>
 
+**updated** in 2025
+remove all rgeos dependency and replaced with sf
+
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4740920.svg)](https://doi.org/10.5281/zenodo.4740920)
-
-
-```{r, echo=FALSE}
-library(emo)
-```
 
 This package contains: <br>  
 - **Tracking data** from Masked boobies _(Sula dactylatra)_ collected at Easter Island.  
 - **Functions** to clean your data and calculate the foraging trip parameters of the individuals.
-
-**[Enlace en español](https://www.miriam-lerma.com/posts/2021-05-14-sula/).**
 
 The goal is that you use the data as an example and adapt your data accordingly to calculate your own foraging trip parameters.
 Also you can have most of the information in parallel to your original tracking data for check-ups in a GIS software.

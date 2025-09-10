@@ -72,7 +72,11 @@ calcular_maxdist<-function(GPS_data=GPS_data,
     sp::proj4string(Viaje_spatial)= sp::CRS("+init=epsg:4326") 
     
     
-    maxdist_m<-(geosphere::distm(Viaje_spatial,Nest_spatial,fun = geosphere::distHaversine))
+    Viaje_coords <- as.matrix(Viaje_df[, c('Longitude', 'Latitude')])
+    Nest_coords <- as.matrix(Nest_df[, c('Longitude', 'Latitude')])
+    
+    maxdist_m <- geosphere::distm(Viaje_coords, Nest_coords, fun = geosphere::distHaversine)
+    
     meters_df<-cbind(Viaje_df,maxdist_m)
     meters_df$maxdist_km<-round(meters_df$maxdist_m/1000,digits=2)
     meters_df$maxdist_m<-NULL

@@ -44,6 +44,7 @@ interpolate_trips<-function(GPS_data=GPS_data,
   for( i in seq_along(Trips_ls)){
     Trip_df <- Trips_ls[[i]] 
     
+    
     # Longitude, make sure the column name corresponds, and dt must be in the right format
     New_longitude0 <- stats::approx(Trip_df$dt, Trip_df$Longitude,
                                     xout = seq(min(Trip_df$dt), max(Trip_df$dt), by = interval))

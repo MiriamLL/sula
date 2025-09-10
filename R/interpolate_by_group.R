@@ -40,6 +40,7 @@ interpolate_by_group<-function(GPS_data = GPS_data,
   for (i in seq_along(long_trips)) {
     separate_groups <- long_trips[[i]]
     
+    separate_groups <- separate_groups[!duplicated(separate_groups$dt), ]
     
     new_longitude0 <- stats::approx(separate_groups$dt, separate_groups$Longitude, 
                                     xout = seq(min(separate_groups$dt), max(separate_groups$dt), by = interval))

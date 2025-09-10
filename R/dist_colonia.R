@@ -36,21 +36,15 @@ dist_colonia<-function(GPS_edited=GPS_edited,
   track_spatial$lat<-track_spatial$Latitude
   track_spatial$lon<-track_spatial$Longitude
   sp::coordinates(track_spatial)<-~lon+lat
+  sp::proj4string(track_spatial) <- sp::CRS("+proj=longlat +datum=WGS84")
   
   # colonia
   colonia<-nest_loc
   colonia_spatial<- sp::SpatialPoints(cbind(colonia$Longitude,colonia$Latitude)) 
   
-  #crs
-  sp::proj4string(track_spatial)= sp::CRS("+init=epsg:4326")
-  sp::proj4string(colonia_spatial)= sp::CRS("+init=epsg:4326")
-  
-  #error: Points are projected. They should be in degrees (longitude/latitude)
-  track_spatial <- sp::spTransform(track_spatial, sp::CRS("+init=epsg:4326"))
-  colonia_spatial <- sp::spTransform(colonia_spatial, sp::CRS("+init=epsg:4326"))
-  
   # distancia_km
-  maxdist_m<-(geosphere::distm(track_spatial,colonia_spatial,fun = geosphere::distHaversine))
+  maxdist_m <- geosphere::distm(track_spatial, colonia_spatial, fun = geosphere::distHaversine)
+  
   meters_df<-cbind(track_df,maxdist_m)
   meters_df$maxdist_km<-round(meters_df$maxdist_m/1000,digits=2)
   meters_df$maxdist_m<-NULL

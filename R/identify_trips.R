@@ -13,24 +13,14 @@ identify_trips<-function(GPS_data=GPS_data,
                              Nest_location=Nest_location,
                              Distance_km=Distance_km){
   
-  if ("Latitude" %in% colnames(GPS_data)){
-  } else {
-    warning("Please check that GPS_data has a column named Latitude, otherwise please rename the column as Latitude")
-  }
+  required_cols <- c("Longitude", "Latitude")
   
-  if ("Longitude" %in% colnames(GPS_data)){
-  } else {
-    warning("Please check that GPS_data has a column named Longitude, otherwise please rename the column as Longitude")
-  }
-  
-  if ("Latitude" %in% colnames(Nest_location)){
-  } else {
-    warning("Please check that Nest_location has a column named Latitude, otherwise please rename the column as Latitude")
-  }
-  
-  if ("Longitude" %in% colnames(Nest_location)){
-  } else {
-    warning("Please check that Nest_location has a column named Longitude, otherwise please rename the column as Longitude")
+  for (df_name in c("GPS_data", "Nest_location")) {
+    df <- get(df_name)
+    missing_cols <- setdiff(required_cols, colnames(df))
+    if (length(missing_cols) > 0) {
+      stop(paste("Missing columns in", df_name, ":", paste(missing_cols, collapse = ", ")))
+    }
   }
   
   # tracks
@@ -41,33 +31,25 @@ identify_trips<-function(GPS_data=GPS_data,
   sp::coordinates(track_spatial)<-~lon+lat
   sp::proj4string(track_spatial)= sp::CRS("+init=epsg:4326")
   track_spatial <- sp::spTransform(track_spatial, sp::CRS("+init=epsg:4326"))
+  track_spatial<-sf::st_as_sf(track_spatial)
   
-  #colonia
+  # center buffer
   colonia<-Nest_location
   colonia_spatial<- sp::SpatialPoints(cbind(colonia$Longitude,colonia$Latitude)) 
   sp::proj4string(colonia_spatial)= sp::CRS("+init=epsg:4326") 
   colonia_spatial <- sp::spTransform(colonia_spatial, sp::CRS("+init=epsg:4326"))
+  colonia_spatial<-sf::st_as_sf(colonia_spatial)
   
-  # distancia_km
-  Distance_km<-Distance_km/100
-  distancia_buf<-rgeos::gBuffer(colonia_spatial, width=1*Distance_km) 
+  # distance
+  Distance_km<-Distance_km*1000
+  distancia_buffer<-sf::st_buffer(colonia_spatial, Distance_km)
   
-  # distancia_buffer
-  distancia_buffer<-distancia_buf
-  # tiene que ser convertido a data frame para que aparezca la coluna
-  distancia_buffer_df<-data.frame(ID=1:length(distancia_buffer)) 
-  
-  #problema nota con slot, agregar importFrom("methods", "slot") en NAMESPACE (manualmente)
-  distancia_buffer_id <- sapply(methods::slot(distancia_buffer, "polygons"), function(x) methods::slot(x, "ID"))
-  
-  distancia_buffer_df <- data.frame(ID=1:length(distancia_buffer), row.names = distancia_buffer_id)
-  distancia_buffer<- sp::SpatialPolygonsDataFrame(distancia_buffer, distancia_buffer_df)
-  sp::proj4string(distancia_buffer) <- sp::proj4string(track_spatial)
-  track_buffer<-sp::over(track_spatial, distancia_buffer) 
+  # over
+  track_buffer<-sapply(sf::st_intersects(track_spatial,distancia_buffer),
+                        function(z) if (length(z)==0) NA_integer_ else z[1])
   
   #todo lo que esta dentro del buffer es 1 y fuera es 0
-  track_buffer_df<-as.data.frame(track_buffer)
-  track_df$trip<-as.numeric(track_buffer_df$ID)
+  track_df$trip<-as.numeric(track_buffer)
   
   #sustituye nas por ceros
   track_df$trip[is.na(track_df$trip)] <- 0

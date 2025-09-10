@@ -40,13 +40,13 @@ dist_puntos<-function(GPS_data = GPS_data,separador=separador){
   #calcula para cada elemento de la lista
   for( i in seq_along(Viajes_list)){
     Viaje_df<-Viajes_list[[i]]  
-    Viaje_coords<- Viaje_df[,c('Longitude','Latitude')]
-    Viaje_spatial <- sp::SpatialPointsDataFrame(coords = Viaje_coords, data = Viaje_df)
-    sp::proj4string(Viaje_spatial)= sp::CRS("+init=epsg:4326")  
+    Viaje_coords <- as.matrix(Viaje_df[, c('Longitude', 'Latitude')])
     
     #calcula la distancia para cada punto  
-    Viaje_distancias<-sapply(2:nrow(Viaje_spatial),
-                             function(i){geosphere::distm( Viaje_spatial[i-1,], Viaje_spatial[i,])})
+    Viaje_distancias <- sapply(2:nrow(Viaje_coords),
+                               function(i) {
+                                 geosphere::distm(Viaje_coords[i - 1, ], Viaje_coords[i, ])
+                               })
     
     #c(sf::st_distance(my_df[-1,],my_df[-nrow(my_df),],by_element=TRUE),NA)
     
